@@ -6,6 +6,9 @@
 *.log
 *.out
 *.synctex.gz
+/pract02/base/bin
+/pract02/base/lib64
+/pract02/base/pyvenv.cfg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
