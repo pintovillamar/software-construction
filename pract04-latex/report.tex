@@ -1,0 +1,161 @@
+%package list
+\documentclass{article}
+\usepackage[top=3cm, bottom=3cm, outer=3cm, inner=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{array}
+%\usepackage{multicol}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+\usepackage[numbers,super]{natbib}
+\usepackage{pdfpages}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage[normalem]{ulem}
+% %% Own Packages %%
+% \usepackage{csquotes}
+% \MakeOuterQuote{"}
+\usepackage{listings}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\csemail}{vmachacaa@ulasalle.edu.pe}
+\newcommand{\csdocente}{MSc. Vicente Enrique Machaca Arceda}
+\newcommand{\cscurso}{Construcción De Software}
+\newcommand{\csuniversidad}{Universidad La Salle}
+\newcommand{\csescuela}{Escuela Profesional de Ingeniería de Software}
+\newcommand{\cspracnr}{04}
+\newcommand{\cstema}{Base de datos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[english,spanish]{babel}
+\usepackage[utf8]{inputenc}
+\AtBeginDocument{\selectlanguage{spanish}}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\refname}{Referencias}
+\renewcommand{\tablename}{Tabla} %esto no funciona cuando se usa babel
+\AtBeginDocument{%
+	\renewcommand\tablename{Tabla}
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\fancyhead[L]{\raisebox{-0.2\height}{\includegraphics[width=4cm]{../../img/lasalle_black.pdf}}}
+\fancyhead[C]{}
+\fancyhead[R]{\fontsize{7}{7}\selectfont	\csuniversidad \\ \csescuela \\ \textbf{\cscurso} }
+\fancyfoot[L]{MSc. Vicente Machaca}
+\fancyfoot[C]{\cscurso}
+\fancyfoot[R]{Página \thepage}
+
+
+
+
+
+
+
+\begin{document}
+
+\vspace*{10pt}
+
+\begin{center}
+    \fontsize{17}{17} \textbf{ Práctica \cspracnr}
+\end{center}
+%\centerline{\textbf{\underline{\Large Título: Informe de revisión del estado del arte}}}
+%\vspace*{0.5cm}
+
+
+\begin{table}[h]
+    \begin{tabular}{|x{4.7cm}|x{4.8cm}|x{4.8cm}|}
+        \hline
+        \textbf{DOCENTE} & \textbf{CARRERA} & \textbf{CURSO} \\
+        \hline
+        \csdocente       & \csescuela       & \cscurso       \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+    \begin{tabular}{|x{4.7cm}|x{4.8cm}|x{4.8cm}|}
+        \hline
+        \textbf{PRÁCTICA} & \textbf{TEMA} & \textbf{DURACIÓN} \\
+        \hline
+        \cspracnr         & \cstema       & 2 horas           \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\section{Datos de los estudiantes}
+\begin{itemize}
+    \item Grupo: 1
+    \item Integrantes:
+          \begin{itemize}
+              \item Elvis Andre Cruces Gomez
+              \item Yoshiro Milton Miranda Valdivia
+              \item José Alfredo Pinto Villamar
+          \end{itemize}
+\end{itemize}
+
+
+
+
+
+\section{Propuesta: PostgresSQL}\label{sec:Intro}
+\subsection{Introducción}
+En la actualidad los sistemas de información se manejan mediante las bases de
+datos y se han convertido en elementos imprescindibles para nuestra vida
+cotidiana. Dentro de este tema podemos encontrar las bases de datos
+transaccionales que siguen 4 criterios muy importantes para su aplicación, el
+conocido ACID (Atomicidad, consistencia, isolación, durabilidad). Entre las
+transacciones que maneja las BD transaccionales, encontramos las On-Line
+Transaction Processing (OLTP), enfocadas sobre todo en procesos de insert,
+delete, update, luego encontramos el On-Line Analytical Processing (OLAP) que se
+enfoca principalmente en hacer consultas. Existen 2 tipos de escalabilidad, el
+Scale Up y Scale Out, las cuales son usadas en las bases de datos SQL y las
+NoSQL, respectivamente. Dentro de las BD SQL se maneja el OLTP y en las NoSQL se
+utiliza OLAP, donde se encuentra PostgreSQL, nuestra base de datos.
+
+\subsection{Definición}
+PostgreSQL, también conocido como Postgres, es un sistema de administración de
+bases de datos relacionales gratuito y de código abierto que enfatiza la
+extensibilidad y el cumplimiento de SQL.
+
+\subsection{¿Por qué usar SQL?}
+Dentro de los puntos a considerar para la realización del presente proyecto,
+optamos por usar una base de datos SQL, por el principal hecho de que nosotros
+vamos a manejar más el uso de registros para las asistencias y participaciones.
+En cambio las NoSQL, están diseñadas más que todo para el tema de consultas y
+para nuestro proyecto el tema de las consultas no es lo primordial. Otro punto
+que resalta en el uso de las SQL, es que son menos vulnerables a fallas.
+
+\subsection{Ventajas y desventajas}
+\begin{itemize}
+    \item Ventajas: Opensource y gratis. pgAdmin para el gestor ``fácil e intuitiva''.
+        Extensibilidad (Python).
+    \item Desventajas: La sintaxis de sus comandos puede llegar a
+        ser poco intuitiva si no hay previo conocimiento en SQL.
+\end{itemize}
+
+%\clearpage
+%\bibliographystyle{apalike}
+\bibliographystyle{IEEEtranN}
+\nocite{*}
+\bibliography{refs.bib}
+%\bibliography{bibliography}
+
+\section{Repositorio}\label{sec:Repositorio}
+\begin{itemize}
+    \item {\color{blue}\href{https://github.com/pintovillamar/software-construction/tree/main/}{Practica 4}}
+\end{itemize}
+
+
+\end{document}
