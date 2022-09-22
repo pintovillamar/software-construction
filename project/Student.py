@@ -20,7 +20,7 @@ class StudentSchema(ma.Schema):
             'std_year',
             'user_usr_id'
         )
-
+ 
 db.create_all()
 
 Student_schema = StudentSchema()
