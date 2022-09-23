@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h1>Holaaaa</h1> {{ user_name }}
+    <h4>  {{user_age}} </h4>
+    
+    {% if user_age > 18 %}
+        <p> Es mayor de edad.</p>
+    {% endif %}
+
+    {% for item in list  %} <!-- list is the name of the param-->
+        <p> {{item}} </p>
+    {% endfor %}
+</body>  
+
+</html>

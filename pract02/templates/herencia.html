@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+
+<!-- enviamos el dato de la variable {{title}} a la plantilla base.html -->
+{% block title %}  
+    {{ title }} 
+{% endblock %}
+
+{% block content %}
+    <p> Esto es parte del index </p>
+    
+    {% from "_macro.html" import show_list_h %}
+    {{ show_list_h( title ) }}
+
+{% endblock%}
