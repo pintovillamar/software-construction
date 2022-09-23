@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block title %}  {{ title }} {% endblock %}
+
+{% block content %}
+
+<!-- aqui llamamos a una macro -->
+{% from "_macro.html" import render_field %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10-offset-1">
+            <br>
+            <br>
+            <form name="sentMessage" id="contactForm"  method="POST" >
+            
+                <div class="row control-group">
+                    <div class= "form-group col-xs-12 floating-label-form-groupcontrols">
+                    {{ render_field( form.username, class= 'form-control' ) }}  
+                    <p class="help-block text-danger" >
+                    </div>
+                </div>
+
+                <div class="row control-group">
+                    <div class= "form-group col-xs-12 floating-label-form-groupcontrols">
+                    {{ render_field( form.email , class= 'form-control' ) }}
+                    <p class="help-block text-danger" >
+                    </div>
+                </div>
+
+                <div class="row control-group">
+                    <div class= "form-group col-xs-12 floating-label-form-groupcontrols">
+                    {{ render_field( form.comment , class= 'form-control' ) }}
+                    <p class="help-block text-danger" >
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="success"> </div>
+                <div class ="row">
+                    <div class= "form-group col-xs-12">
+                        <button type="submit" class="btn btn-primary"> Send</button>                
+                    </div>
+                </div>    
+
+            </form>                
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock%}

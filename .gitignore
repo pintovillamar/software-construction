@@ -6,9 +6,8 @@
 *.log
 *.out
 *.synctex.gz
-/pract02/base/bin
-/pract02/base/lib64
-/pract02/base/pyvenv.cfg
+/pract*/base
+/base
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -20,7 +19,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/

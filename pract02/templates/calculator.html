@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <form action="/calculator" method="POST">
+            A:
+            <input type="text" name="a"><br>
+            B:
+            <input type="text" name="b"><br>
+            <button type="submit" value="submit">Calculate</button>
+        </form>
+        {% if result %}
+        <p>Result =  {{ result }}</p>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+    <!--esto se heradara en la demas plantillas -->
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+    <!-- con esto incluyemos un estilo -->
+    <link rel='stylesheet' type='text/css' href='{{ url_for("static", filename="css/style.css") }}'>
+
+    <!-- con esto incluyemos Javascript -->
+    <script type="text/javascript" src=" {{ url_for('static', filename='js/functions.js') }} "></script>
+
+    <!-- contenido dinamico -->
+    <title>  {% block title %} {% endblock %}  </title>
+</head>
+<body>             
+    {% block content %}
+    {% endblock %}  
+
+    <footer>
+        <div class ='container'>
+            <div class='row'>
+                <p class='copyright text-muted'>&copy; Curso Flask </p>                
+            </div>
+            <img src=" {{ url_for('static', filename='img/peeporain.gif') }}" width=100px >
+        </div>
+    </footer>        
+</body>  
+</html>
