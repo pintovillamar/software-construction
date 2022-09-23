@@ -1,3 +1,11 @@
+from flask import request
+from flask import jsonify
+from connect import conn # import conn de connect
+from connect import app
+from connect import db, ma # SQLAlchemy Marshmelow
+
+cursor = conn.cursor()
+
 class User_type(db.Model):
     ust_id = db.Column(db.Integer, primary_key=True)
     ust_name = db.Column(db.String(70))
