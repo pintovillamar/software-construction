@@ -83,16 +83,3 @@ def select_courses():
         data.append(content)
         content = {}
     return jsonify(data)
-
-@app.route('/create_user_type', methods=['POST'])
-def create_user_type():
-    print(request.json)
-
-    cur_name = request.json['ust_id']
-    cur_des = request.json['ust_name']
-
-    new_course = Course(cur_name, cur_des)
-    db.session.add(new_course)
-    db.session.commit()
-
-    return course_schema.jsonify(new_course)
