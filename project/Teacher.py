@@ -3,12 +3,13 @@ from flask import jsonify
 from connect import conn # import conn de connect
 from connect import app
 from connect import db, ma # SQLAlchemy Marshmelow
+from User import User # from UserType.py import User_type ForeignKey use only
 
 cursor = conn.cursor()
 
 class Teacher(db.Model):
     tea_id = db.Column(db.Integer, primary_key=True)
-    usr_id = db.Column(db.String(70))
+    usr_id = db.Column(db.Integer, db.ForeignKey(User.usr_id))
     tea_type = db.Column(db.String(70))
     tea_cat = db.Column(db.String(70))
 
