@@ -16,9 +16,9 @@ class User(db.Model):
     usr_last_name = db.Column(db.String(70))
     usr_dob = db.Column(db.Date())# dia de nacimiento
     usr_email = db.Column(db.String(70))
-    user_type_ust_id = db.Column(db.Integer, db.ForeignKey(User_type.ust_id))
+    ust_id = db.Column(db.Integer, db.ForeignKey(User_type.ust_id))
 
-    def __init__(self, usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, user_type_ust_id):
+    def __init__(self, usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id): # este se usa para el JSON así que guardarlo
         self.usr_dni = usr_dni
         self.usr_pass = usr_pass
         self.usr_photo = usr_photo
@@ -26,7 +26,7 @@ class User(db.Model):
         self.usr_last_name = usr_last_name
         self.usr_dob = usr_dob
         self.usr_email = usr_email
-        self.user_type_ust_id = user_type_ust_id
+        self.ust_id = ust_id
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -39,7 +39,7 @@ class UserSchema(ma.Schema):
             'usr_last_name',
             'usr_dob',
             'usr_email',
-            'user_type_ust_id'
+            'ust_id'
         )
 
 user_schema = UserSchema()
@@ -63,9 +63,9 @@ def create_user():
     usr_last_name = request.json['usr_last_name']
     usr_dob = request.json['usr_dob']
     usr_email = request.json['usr_email']
-    user_type_ust_id = request.json['user_type_ust_id']
+    ust_id = request.json['ust_id']
 
-    new_user = User(usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, user_type_ust_id)
+    new_user = User(usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id)
     db.session.add(new_user)
     db.session.commit()
 
