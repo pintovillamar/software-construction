@@ -15,7 +15,7 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres@127.0.0.1:5432/prueba"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+flag = app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)

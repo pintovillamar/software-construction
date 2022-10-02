@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import request
 from flask import jsonify
 from connect import conn # import conn de connect
@@ -85,7 +84,7 @@ def delete_user_type(id):
 # Get users by user_type (students)
 @app.route('/get_students',methods=['POST'])
 def get_students():
-    sql='select * from "user" where "user_type_ust_id"=2'
+    sql='select * from "user" where "ust_id"=2'
 
     cursor.execute(sql)
     rv = cursor.fetchall()
@@ -101,7 +100,7 @@ def get_students():
 # get users by user_type (teachers)
 @app.route('/get_teachers',methods=['POST'])
 def get_teachers():
-    sql='select * from "user" where "user_type_ust_id"=3'
+    sql='select * from "user" where "ust_id"=3'
 
     cursor.execute(sql)
     rv = cursor.fetchall()

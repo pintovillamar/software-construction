@@ -55,13 +55,13 @@ def groups():
     result = groups_schema.dump(all_groups) # lo vuelve serializable
     return jsonify(result)
 
-@app.route('/group/<id>', methods=['POST'])
+@app.route('/group/<gru_id>', methods=['POST'])
 def group(gru_id):
     result = Group.query.get(gru_id)
     result = group_schema.dump(result) # lo vuelve serializable
     return jsonify(result)
 
-@app.route('/update_group/<id>', methods=['POST'])
+@app.route('/update_group/<gru_id>', methods=['POST'])
 def update_group(gru_id):
     group = Group.query.get(gru_id)
     tea_id = request.json['tea_id']
