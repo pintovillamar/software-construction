@@ -75,7 +75,7 @@ def update_group(gru_id):
     db.session.commit()
     return group_schema.jsonify(group)
 
-@app.route('/delete_group/<id>', methods=['POST'])
+@app.route('/delete_group/<gru_id>', methods=['POST'])
 def delete_group(gru_id):
     group = Group.query.get(gru_id)
     db.session.delete(group)

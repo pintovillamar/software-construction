@@ -49,7 +49,7 @@ def course(cur_id):
     result = course_schema.dump(result) # lo vuelve serializable
     return jsonify(result)
 
-@app.route('/update_course/<id>', methods=['POST'])
+@app.route('/update_course/<cur_id>', methods=['POST'])
 def update_course(cur_id):
     course = Course.query.get(cur_id)
     cur_name = request.json['cur_name']
@@ -61,7 +61,7 @@ def update_course(cur_id):
     db.session.commit()
     return course_schema.jsonify(course)
 
-@app.route('/delete_course/<id>', methods=['POST'])
+@app.route('/delete_course/<cur_id>', methods=['POST'])
 def delete_course(cur_id):
     course = Course.query.get(cur_id)
     db.session.delete(course)

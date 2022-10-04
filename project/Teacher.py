@@ -58,7 +58,7 @@ def teachers():
     return jsonify(result)
 
 # Search for a teacher by id
-@app.route('/teacher/<id>', methods=['POST'])
+@app.route('/teacher/<tea_id>', methods=['POST'])
 def teacher(id):
     teacher = Teacher.query.get(id)
     result = teacher_schema.dump(teacher)
@@ -66,7 +66,7 @@ def teacher(id):
 
 
 # Update a teacher by id
-@app.route('/update_teacher/<id>', methods=['POST'])
+@app.route('/update_teacher/<tea_id>', methods=['POST'])
 def update_teacher(id):
     teacher = Teacher.query.get(id)
 

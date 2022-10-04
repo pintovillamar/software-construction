@@ -51,7 +51,7 @@ def user_types():
 
 
 # Search for a user_type by id
-@app.route('/user_type/<id>', methods=['POST'])
+@app.route('/user_type/<ust_id>', methods=['POST'])
 def user_type(id):
     user_type = User_type.query.get(id)
     result = user_type_schema.dump(user_type)
@@ -59,7 +59,7 @@ def user_type(id):
 
 
 # Update user_type
-@app.route('/update_user_type/<id>', methods=['POST'])
+@app.route('/update_user_type/<ust_id>', methods=['POST'])
 def update_user_type(id):
     user_type = User_type.query.get(id)
 
@@ -73,7 +73,7 @@ def update_user_type(id):
 
 
 # Delete user_type
-@app.route('/delete_user_type/<id>', methods=['POST'])
+@app.route('/delete_user_type/<ust_id>', methods=['POST'])
 def delete_user_type(id):
     user_type = User_type.query.get(id)
     db.session.delete(user_type)

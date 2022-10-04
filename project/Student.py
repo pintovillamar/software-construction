@@ -67,7 +67,7 @@ def student(std_id):
 
 
 # Update a teacher by id
-@app.route('/update_student/<id>', methods=['POST'])
+@app.route('/update_student/<std_id>', methods=['POST'])
 def update_student(std_id):
     student = Student.query.get(std_id)
     std_regular = request.json['std_regular']
@@ -81,7 +81,7 @@ def update_student(std_id):
 
 
 # Delete a teacher by id
-@app.route('/delete_student/<id>', methods=['POST'])
+@app.route('/delete_student/<std_id>', methods=['POST'])
 def delete_student(std_id):
     student = Student.query.get(std_id)
     db.session.delete(student)

@@ -81,14 +81,14 @@ def users():
 
 
 # Search for a user by id
-@app.route('/user/<id>', methods=['POST'])
+@app.route('/user/<usr_id>', methods=['POST'])
 def user(id):
     user = User.query.get(id)
     result = user_schema.dump(user)
     return user_schema.jsonify(result)
 
 # Update a user by id
-@app.route('/update_user/<id>', methods=['POST'])
+@app.route('/update_user/<usr_id>', methods=['POST'])
 def update_user(usr_id):
     user = User.query.get(usr_id)
 
@@ -115,7 +115,7 @@ def update_user(usr_id):
     return user_schema.jsonify(user)
 
 # Delete user
-@app.route('/delete_user/<id>', methods=['POST'])
+@app.route('/delete_user/<usr_id>', methods=['POST'])
 def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
