@@ -1,58 +1,11 @@
-from psycopg2.pool import SimpleConnectionPool
-from contextlib import contextmanager
+from flask import request
+from flask import jsonify
+from connect import conn # import conn de connect
+from connect import app
+from connect import db, ma # SQLAlchemy Marshmelow
+from Group import Group # from UserType.py import User_type ForeignKey use only
 
-dbConnection = "dbname='flaskpsql' user='postgres' host='localhost' password='Pass.123$'"
-
-# pool define with 10 live connections
-connectionpool = SimpleConnectionPool(1,10,dsn=dbConnection)
-
-@contextmanager
-def getcursor():
-    con = connectionpool.getconn()
-    try:
-        yield con.cursor()
-    finally:
-        connectionpool.putconn(con)
-
-if __name__ == "__main__":
-    try:
-        # with here will take care of put connection when its done
-        with getcursor() as cur:
-            cur.execute("select * from task")
-            result_set = cur.fetchall()
-
-        for result in result_set:
-            print(result)
-
-    except Exception as e:
-        print("error in executing with exception: ", e)from psycopg2.pool import SimpleConnectionPool
-from contextlib import contextmanager
-
-dbConnection = "dbname='flaskpsql' user='postgres' host='localhost' password='Pass.123$'"
-
-# pool define with 10 live connections
-connectionpool = SimpleConnectionPool(1,10,dsn=dbConnection)
-
-@contextmanager
-def getcursor():
-    con = connectionpool.getconn()
-    try:
-        yield con.cursor()
-    finally:
-        connectionpool.putconn(con)
-
-if __name__ == "__main__":
-    try:
-        # with here will take care of put connection when its done
-        with getcursor() as cur:
-            cur.execute("select * from task")
-            result_set = cur.fetchall()
-
-        for result in result_set:
-            print(result)
-
-    except Exception as e:
-        print("error in executing with exception: ", e)
+cursor = conn.cursor()
 
 class Schedule(db.Model):
     sch_id = db.Column(db.Integer, primary_key=True)
@@ -67,6 +20,8 @@ class Schedule(db.Model):
         self.sch_day = sch_day
         self.gru_id = gru_id
 
+db.create_all()
+
 class ScheduleSchema(ma.Schema):
     class Meta:
         fields = (
@@ -76,7 +31,7 @@ class ScheduleSchema(ma.Schema):
             'sch_day',
             'gru_id'
         )
-    
+
 schedule_schema = ScheduleSchema()
 schedules_schema = ScheduleSchema(many=True)
 
