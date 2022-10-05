@@ -32,3 +32,33 @@ participation_schema = ParticipationSchema()
 participations_schema = ParticipationSchema(many=True)
 
 db.create_all()
+
+class Participations_Model:
+    # Create a participation
+    def create_participation(self, par_date, gru_id, std_id, par_val):
+        new_participation = Participation(par_date, gru_id, std_id, par_val)
+        db.session.add(new_participation)
+        db.session.commit()
+        return participation_schema.dump(new_participation)
+
+    # List participation with ID
+    def participation(self, par_id):
+        participation = Participation.query.get(par_id)
+        return participation_schema.dump(participation)
+
+    # List all participations
+    def participations(self):
+        all_participations = Participation.query.all()
+        result = participation_schema.dump(all_participations)
+        db.session.commit()
+        return result
+
+    # Update participation by ID
+    def update_participation(self, par_id):
+        participation = Participation.query.get(par_id)
+        participation.par_date = Participation.par_date
+        participation.gru_id = Participation.gru_id
+        participation.std_id = Participation.std_id
+        participation.par_val = Participation.par_val
+        db.session.commit()
+        return participation_schema.jsonify(participation)

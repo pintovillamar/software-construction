@@ -32,3 +32,33 @@ attendance_schema = AttendanceSchema()
 attendances_schema = AttendanceSchema(many=True)
 
 db.create_all()
+
+class Attendances_Model:
+    # Create a attendance
+    def create_attendance(self, att_date, gru_id, std_id, att_val):
+        new_attendance = Attendance(att_date, gru_id, std_id, att_val)
+        db.session.add(new_attendance)
+        db.session.commit()
+        return attendance_schema.dump(new_attendance)
+
+    # List attendance with ID
+    def attendance(self, att_id):
+        attendance = Attendance.query.get(att_id)
+        return attendance_schema.dump(attendance)
+
+    # List all user types
+    def attendances(self):
+        all_attendances = Attendance.query.all()
+        result = attendance_schema.dump(all_attendances)
+        db.session.commit()
+        return result
+
+    # Update attendance by ID
+    def update_attendance(self, att_id):
+        attendance = Attendance.query.get(att_id)
+        attendance.att_date = Attendance.att_date
+        attendance.gru_id = Attendance.gru_id
+        attendance.std_id = Attendance.std_id
+        attendance.att_val = Attendance.att_val
+        db.session.commit()
+        return attendance_schema.jsonify(attendance)
