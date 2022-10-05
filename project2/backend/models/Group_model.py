@@ -1,10 +1,11 @@
 from backend.models.connection_pool import getcursor
+from flask import jsonify
 from backend.models.conn import db
 from backend.models.conn import ma
 
 # Import FKs
-from project2.backend.models.Teachers_model import Teacher
-from project2.backend.models.Courses_model import Course
+from project2.backend.models.Teacher_model import Teacher
+from project2.backend.models.Course_model import Course
 
 class Group(db.Model):
     gru_id = db.Column(db.Integer, primary_key=True)    
@@ -31,7 +32,7 @@ groups_schema = GroupSchema(many=True)
 
 db.create_all()
 
-class Groups_Model:
+class Group_Model:
     # Create a group
     def create_group(self, tea_id, gru_name, cur_id):
         new_group = Group(tea_id, gru_name, cur_id)
@@ -41,14 +42,23 @@ class Groups_Model:
 
     # List group with ID
     def group(self, gru_id):
+        # group = Group.query.get(gru_id)
+        # return group_schema.dump(group)
         group = Group.query.get(gru_id)
-        return group_schema.dump(group)
+        result = group_schema.dump(group)
+        # db.session.commit()
+        print(result)
+        return jsonify(result)
 
     # List all groups
     def groups(self):
+        # all_groups = Group.query.all()
+        # result = groups_schema.dump(all_groups)
+        # db.session.commit()
+        # return result
         all_groups = Group.query.all()
         result = groups_schema.dump(all_groups)
-        db.session.commit()
+        print(result)
         return result
 
     # Update group by ID
@@ -60,3 +70,9 @@ class Groups_Model:
         db.session.commit()
         return group_schema.jsonify(group)
         
+    # Delete group by ID
+    def delete_user_type(self, gru_id):
+        group = Group.query.get(gru_id)
+        db.session.delete(group)
+        db.session.commit()
+        return group_schema.jsonify(group)
