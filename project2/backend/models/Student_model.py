@@ -29,7 +29,7 @@ students_schema = StudentSchema(many=True)
 
 db.create_all()
 
-class Students_Model:
+class Student_Model:
     # Create a student
     def create_student(self, usr_id, std_regular, std_year):
         new_student = Student(usr_id, std_regular, std_year)

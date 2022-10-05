@@ -33,7 +33,7 @@ attendances_schema = AttendanceSchema(many=True)
 
 db.create_all()
 
-class Attendances_Model:
+class Attendance_Model:
     # Create a attendance
     def create_attendance(self, att_date, gru_id, std_id, att_val):
         new_attendance = Attendance(att_date, gru_id, std_id, att_val)
