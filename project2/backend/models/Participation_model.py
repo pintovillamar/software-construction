@@ -33,7 +33,7 @@ participations_schema = ParticipationSchema(many=True)
 
 db.create_all()
 
-class Participations_Model:
+class Participation_Model:
     # Create a participation
     def create_participation(self, par_date, gru_id, std_id, par_val):
         new_participation = Participation(par_date, gru_id, std_id, par_val)
