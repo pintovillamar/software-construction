@@ -6,7 +6,7 @@ from flask_cors import CORS, cross_origin # para que no genere errores de CORS a
 from backend.models.conn import app
 
 
-from backend.blueprints.User_types_blueprint import user_types_blueprint
+from backend.blueprints.User_type_blueprint import user_type_blueprint
 
 #app = Flask(__name__)
 # para que utilice vue compilado ( npm run build ). En la carpeta dist, esta lo compilado de vue
@@ -19,7 +19,7 @@ from backend.blueprints.User_types_blueprint import user_types_blueprint
 # 1. Modificar los nombres a plural.
 # 2. Crear los demas blueprints y modelos correspondientes.
 
-app.register_blueprint(user_types_blueprint)
+app.register_blueprint(user_type_blueprint)
 
 cors = CORS(app, support_credentials=True)
 
