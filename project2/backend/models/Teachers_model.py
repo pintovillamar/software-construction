@@ -43,7 +43,7 @@ class Teachers_Model:
         teacher = Teacher.query.get(tea_id)
         return teacher_schema.dump(teacher)
 
-    # List all user types
+    # List all teachers
     def teachers(self):
         all_teachers = Teacher.query.all()
         result = teachers_schema.dump(all_teachers)
