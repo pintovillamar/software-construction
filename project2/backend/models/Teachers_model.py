@@ -5,7 +5,7 @@ from backend.models.conn import ma
 # Import FKs
 from project2.backend.models.Users_model import User
 
-class Teachers(db.Model):
+class Teacher(db.Model):
     tea_id = db.Column(db.Integer, primary_key=True)    
     usr_id = db.Column(db.Integer, db.ForeignKey(User.usr_id))
     tea_type = db.Column(db.String(70))
@@ -33,29 +33,29 @@ db.create_all()
 class Teachers_Model:
     # Create a teacher
     def create_teacher(self, usr_id, tea_type, tea_cat):
-        new_teacher = Teachers(usr_id, tea_type, tea_cat)
+        new_teacher = Teacher(usr_id, tea_type, tea_cat)
         db.session.add(new_teacher)
         db.session.commit()
         return teacher_schema.dump(new_teacher)
 
     # List teacher with ID
     def teacher(self, tea_id):
-        teacher = Teachers.query.get(tea_id)
+        teacher = Teacher.query.get(tea_id)
         return teacher_schema.dump(teacher)
 
-    # List all user types
+    # List all teachers
     def teachers(self):
-        all_teachers = Teachers.query.all()
+        all_teachers = Teacher.query.all()
         result = teachers_schema.dump(all_teachers)
         db.session.commit()
         return result
 
     # Update teacher by ID
     def update_teacher(self, tea_id):
-        teacher = Teachers.query.get(tea_id)
-        teacher.usr_id = Teachers.usr_id
-        teacher.tea_type = Teachers.tea_type
-        teacher.tea_cat = Teachers.tea_cat
+        teacher = Teacher.query.get(tea_id)
+        teacher.usr_id = Teacher.usr_id
+        teacher.tea_type = Teacher.tea_type
+        teacher.tea_cat = Teacher.tea_cat
         db.session.commit()
         return teacher_schema.jsonify(teacher)
         
