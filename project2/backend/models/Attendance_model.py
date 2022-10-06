@@ -54,7 +54,7 @@ class Attendance_Model:
     # List all user types
     def attendances(self):
         all_attendances = Attendance.query.all()
-        result = attendance_schema.dump(all_attendances)
+        result = attendances_schema.dump(all_attendances)
         return result
 
     # Update attendance by ID
