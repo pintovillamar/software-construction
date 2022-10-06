@@ -4,9 +4,14 @@ from flask import jsonify
 from flask import render_template
 from flask_cors import CORS, cross_origin # para que no genere errores de CORS al hacer peticiones
 from backend.models.conn import app
+import werkzeug.utils
 
 
 from backend.blueprints.User_type_blueprint import user_type_blueprint
+from backend.blueprints.User_blueprint import user_blueprint
+from backend.blueprints.Schedule_blueprint import schedule_blueprint
+from backend.blueprints.Enroll_blueprint import enroll_blueprint
+
 
 #app = Flask(__name__)
 # para que utilice vue compilado ( npm run build ). En la carpeta dist, esta lo compilado de vue
@@ -20,13 +25,16 @@ from backend.blueprints.User_type_blueprint import user_type_blueprint
 # 2. Crear los demas blueprints y modelos correspondientes.
 
 app.register_blueprint(user_type_blueprint)
+app.register_blueprint(user_blueprint)
+app.register_blueprint(schedule_blueprint)
+app.register_blueprint(enroll_blueprint)
 
 cors = CORS(app, support_credentials=True)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def dender_vue(path):
-    return render_template("index.html")
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def dender_vue(path):
+#     return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
