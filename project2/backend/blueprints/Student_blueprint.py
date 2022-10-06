@@ -48,6 +48,7 @@ def update_student(std_id):
                                     request.json['std_year'])
     return jsonify(content)
 
+# Delete student by ID
 @student_blueprint.route('/delete_student/<std_id>', methods=['POST'])
 @cross_origin()
 def delete_student(std_id):

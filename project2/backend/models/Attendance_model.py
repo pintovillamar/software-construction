@@ -1,9 +1,12 @@
+from cgitb import reset
 from backend.models.connection_pool import getcursor
 from backend.models.conn import db
 from backend.models.conn import ma
+from flask import jsonify
+from werkzeug.utils import secure_filename
 
-from project2.backend.models.Students_model import Student
-from project2.backend.models.Group_Model import Group
+from backend.models.Student_model import Student
+from backend.models.Group_model import Group
 
 class Attendance(db.Model):
     att_id = db.Column(db.Integer, primary_key=True)
@@ -39,26 +42,35 @@ class Attendance_Model:
         new_attendance = Attendance(att_date, gru_id, std_id, att_val)
         db.session.add(new_attendance)
         db.session.commit()
-        return attendance_schema.dump(new_attendance)
+        result = attendance_schema.dump(new_attendance)
+        return result
 
     # List attendance with ID
     def attendance(self, att_id):
         attendance = Attendance.query.get(att_id)
-        return attendance_schema.dump(attendance)
+        result = attendance_schema.dump(attendance)
+        return result
 
     # List all user types
     def attendances(self):
         all_attendances = Attendance.query.all()
         result = attendance_schema.dump(all_attendances)
-        db.session.commit()
         return result
 
     # Update attendance by ID
-    def update_attendance(self, att_id):
+    def update_attendance(self, att_id, att_date, gru_id, std_id, att_val):
         attendance = Attendance.query.get(att_id)
-        attendance.att_date = Attendance.att_date
-        attendance.gru_id = Attendance.gru_id
-        attendance.std_id = Attendance.std_id
-        attendance.att_val = Attendance.att_val
+        attendance.att_date = att_date
+        attendance.gru_id = gru_id
+        attendance.std_id = std_id
+        attendance.att_val = att_val
+        db.session.commit()
+        result = attendance_schema.jsonify(attendance)
+        return result
+
+    # Delete attendance by ID
+    def delete_attendance(self, att_id):
+        attendance = Attendance.query.get(att_id)
+        db.session.delete(attendance)
         db.session.commit()
         return attendance_schema.jsonify(attendance)
