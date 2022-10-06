@@ -25,7 +25,7 @@ courses_schema = CourseSchema(many=True)
 
 db.create_all()
 
-class Courses_Model:
+class Course_Model:
     # Create a course
     def create_course(self, cur_name, cur_des):
         new_course = Course(cur_name, cur_des)

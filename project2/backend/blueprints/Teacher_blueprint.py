@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 from flask_cors import CORS, cross_origin 
 
-from backend.models.Teachers_model import Teachers_Model
-model = Teachers_Model()
+from backend.models.Teacher_model import Teacher_Model
+model = Teacher_Model()
 
 
 teachers_blueprint = Blueprint('/teachers_blueprint', __name__)

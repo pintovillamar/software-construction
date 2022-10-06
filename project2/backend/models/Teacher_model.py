@@ -30,7 +30,7 @@ teachers_schema = TeacherSchema(many=True)
 
 db.create_all()
 
-class Teachers_Model:
+class Teacher_Model:
     # Create a teacher
     def create_teacher(self, usr_id, tea_type, tea_cat):
         new_teacher = Teacher(usr_id, tea_type, tea_cat)

@@ -3,7 +3,7 @@ from backend.models.conn import db
 from backend.models.conn import ma
 
 from project2.backend.models.Students_model import Student
-from project2.backend.models.Groups_model import Group
+from project2.backend.models.Group_Model import Group
 
 class Participation(db.Model):
     par_id = db.Column(db.Integer, primary_key=True)
