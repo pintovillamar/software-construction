@@ -1,9 +1,11 @@
 from backend.models.connection_pool import getcursor
+from flask import jsonify
 from backend.models.conn import db
 from backend.models.conn import ma
+from werkzeug.utils import secure_filename
 
 # Import FKs
-from project2.backend.models.Users_model import User
+from backend.models.User_model import User
 
 class Teacher(db.Model):
     tea_id = db.Column(db.Integer, primary_key=True)    
@@ -36,26 +38,38 @@ class Teacher_Model:
         new_teacher = Teacher(usr_id, tea_type, tea_cat)
         db.session.add(new_teacher)
         db.session.commit()
-        return teacher_schema.dump(new_teacher)
+        result = teacher_schema.dump(new_teacher)
+        return result
 
     # List teacher with ID
     def teacher(self, tea_id):
         teacher = Teacher.query.get(tea_id)
-        return teacher_schema.dump(teacher)
+        result = teacher_schema.dump(teacher)
+        return result
 
     # List all teachers
     def teachers(self):
         all_teachers = Teacher.query.all()
         result = teachers_schema.dump(all_teachers)
-        db.session.commit()
         return result
 
     # Update teacher by ID
-    def update_teacher(self, tea_id):
+    def update_teacher(self, tea_id, usr_id, tea_type, tea_cat):
         teacher = Teacher.query.get(tea_id)
-        teacher.usr_id = Teacher.usr_id
-        teacher.tea_type = Teacher.tea_type
-        teacher.tea_cat = Teacher.tea_cat
+        teacher.usr_id = usr_id
+        teacher.tea_type = tea_type
+        teacher.tea_cat = tea_cat
+        db.session.commit()
+        result = teacher_schema.dump(teacher)
+        return result
+
+    # Delete teacher by ID
+    def delete_teacher(self, tea_id):
+        teacher = Teacher.query.get(tea_id)
+        # teacher.usr_id = usr_id
+        # teacher.tea_type = tea_type
+        # teacher.tea_cat = tea_cat
+        db.session.delete(teacher)
         db.session.commit()
         return teacher_schema.jsonify(teacher)
         

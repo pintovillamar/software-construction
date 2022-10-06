@@ -34,7 +34,7 @@ def student(std_id):
 @student_blueprint.route('/students', methods=['POST'])
 @cross_origin()
 def students():
-    content = model.student()
+    content = model.students()
     return jsonify(content)
 
 # Update student by ID
@@ -48,6 +48,7 @@ def update_student(std_id):
                                     request.json['std_year'])
     return jsonify(content)
 
+# Delete student by ID
 @student_blueprint.route('/delete_student/<std_id>', methods=['POST'])
 @cross_origin()
 def delete_student(std_id):

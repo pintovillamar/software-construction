@@ -49,7 +49,7 @@ class Student_Model:
     # List all students
     def students(self):
         all_students = Student.query.all()
-        result = student_schema.dump(all_students)
+        result = students_schema.dump(all_students)
         return result
 
     # Update student by ID
