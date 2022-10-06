@@ -34,7 +34,7 @@ def student(std_id):
 @student_blueprint.route('/students', methods=['POST'])
 @cross_origin()
 def students():
-    content = model.student()
+    content = model.students()
     return jsonify(content)
 
 # Update student by ID
