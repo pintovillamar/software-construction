@@ -68,7 +68,7 @@ class Group_Model:
     def delete_group(self, gru_id):
         group = Group.query.get(gru_id)
         # group.tea_id = tea_id
-        # group.ust_name = gru_name
+        # group.gru_name = gru_name
         # group.cur_id = cur_id
         db.session.delete(group)
         db.session.commit()
