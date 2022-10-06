@@ -2,10 +2,11 @@ from backend.models.connection_pool import getcursor
 from flask import jsonify
 from backend.models.conn import db
 from backend.models.conn import ma
+from werkzeug.utils import secure_filename
 
 # Import FKs
-from project2.backend.models.Teacher_model import Teacher
-from project2.backend.models.Course_model import Course
+from backend.models.Teacher_model import Teacher
+from backend.models.Course_model import Course
 
 class Group(db.Model):
     gru_id = db.Column(db.Integer, primary_key=True)    
@@ -38,41 +39,37 @@ class Group_Model:
         new_group = Group(tea_id, gru_name, cur_id)
         db.session.add(new_group)
         db.session.commit()
-        return group_schema.dump(new_group)
+        result = group_schema.dump(new_group)
+        return result
 
     # List group with ID
     def group(self, gru_id):
-        # group = Group.query.get(gru_id)
-        # return group_schema.dump(group)
         group = Group.query.get(gru_id)
         result = group_schema.dump(group)
-        # db.session.commit()
-        print(result)
-        return jsonify(result)
+        return result
 
     # List all groups
     def groups(self):
-        # all_groups = Group.query.all()
-        # result = groups_schema.dump(all_groups)
-        # db.session.commit()
-        # return result
         all_groups = Group.query.all()
         result = groups_schema.dump(all_groups)
-        print(result)
         return result
 
     # Update group by ID
-    def update_group(self, gru_id):
+    def update_group(self, gru_id, tea_id, gru_name, cur_id):
         group = Group.query.get(gru_id)
-        group.tea_id = Group.tea_id
-        group.gru_name = Group.gru_name
-        group.cur_id = Group.cur_id
+        group.tea_id = tea_id
+        group.gru_name = gru_name
+        group.cur_id = cur_id
         db.session.commit()
-        return group_schema.jsonify(group)
+        result = group_schema.dump(group)
+        return result
         
     # Delete group by ID
-    def delete_user_type(self, gru_id):
+    def delete_group(self, gru_id):
         group = Group.query.get(gru_id)
+        # group.tea_id = tea_id
+        # group.ust_name = gru_name
+        # group.cur_id = cur_id
         db.session.delete(group)
         db.session.commit()
         return group_schema.jsonify(group)
