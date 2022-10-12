@@ -65,7 +65,7 @@ class Attendance_Model:
         attendance.std_id = std_id
         attendance.att_val = att_val
         db.session.commit()
-        result = attendance_schema.jsonify(attendance)
+        result = attendance_schema.dump(attendance)
         return result
 
     # Delete attendance by ID

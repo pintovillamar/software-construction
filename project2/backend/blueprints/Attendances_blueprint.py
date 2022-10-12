@@ -9,51 +9,51 @@ from flask_cors import CORS, cross_origin
 from backend.models.Attendance_model import Attendance_Model
 model = Attendance_Model()
 
-attendace_blueprint = Blueprint('/attendaces_blueprint', __name__)
+attendance_blueprint = Blueprint('/attendances_blueprint', __name__)
 
 # Create a attendace
-@attendace_blueprint.route('/create_attendace', methods=['POST'])
+@attendance_blueprint.route('/create_attendance', methods=['POST'])
 @cross_origin()
-def create_attendace():
+def create_attendance():
     print(request.json['att_date'])
     print(request.json['gru_id'])
     print(request.json['std_id'])
     print(request.json['att_val'])
-    content = model.create_attendace(request.json['att_date'])
-    content = model.create_attendace(request.json['gru_id'])    
-    content = model.create_attendace(request.json['std_id'])
-    content = model.create_attendace(request.json['att_val'])    
+    content = model.create_attendance(request.json['att_date'],
+                                    request.json['gru_id'],
+                                    request.json['std_id'],
+                                    request.json['att_val'])
     return jsonify(content)
 
 # List attendace with ID
-@attendace_blueprint.route('/attendace/<att_id>', methods=['POST'])
+@attendance_blueprint.route('/attendance/<att_id>', methods=['POST'])
 @cross_origin()
-def attendace(att_id):
-    content = model.attendace(att_id)
+def attendance(att_id):
+    content = model.attendance(att_id)
     return jsonify(content)
 
-# List all attendaces
-@attendace_blueprint.route('/attendaces', methods=['POST'])
+# List all attendances
+@attendance_blueprint.route('/attendances', methods=['POST'])
 @cross_origin()
-def attendaces():
-    content = model.attendaces()
+def attendances():
+    content = model.attendances()
     return jsonify(content)
 
 # Update attendace by ID
-@attendace_blueprint.route('/update_attendace/<att_id>', methods=['POST'])
+@attendance_blueprint.route('/update_attendance/<att_id>', methods=['POST'])
 @cross_origin()
-def update_attendace(att_id):
+def update_attendance(att_id):
 
-    content = model.update_attendace(att_id,
+    content = model.update_attendance(att_id,
                                             request.json['att_date'],
                                             request.json['gru_id'],
                                             request.json['std_id'],
                                             request.json['att_val'])
     return jsonify(content)
 
-# Delete attendace by ID
-@attendace_blueprint.route('/delete_attendace/<att_id>', methods=['POST'])
+# Delete attendance by ID
+@attendance_blueprint.route('/delete_attendance/<att_id>', methods=['POST'])
 @cross_origin()
-def delete_attendace(att_id):
-    model.delete_attendace(att_id)
+def delete_attendance(att_id):
+    model.delete_attendance(att_id)
     return f"Attendace {att_id} deleted succsesfully"
