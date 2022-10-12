@@ -12,7 +12,7 @@ enroll_blueprint = Blueprint('/enroll_blueprint', __name__)
 @enroll_blueprint.route('/create_enroll', methods=['POST'])
 @cross_origin()
 def create_enroll():
-    content = model.create_enroll(request.json['stu_id'],
+    content = model.create_enroll(request.json['std_id'],
                                     request.json['gru_id'],
                                     request.json['enr_date'])    
     return jsonify(content)
@@ -36,7 +36,7 @@ def enrolls():
 @cross_origin()
 def update_enroll(enr_id):
     content = model.update_enroll(enr_id, 
-                                    request.json['stu_id'],
+                                    request.json['std_id'],
                                     request.json['gru_id'],
                                     request.json['enr_date'])
     return jsonify(content)

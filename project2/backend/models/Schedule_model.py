@@ -42,7 +42,8 @@ class Schedule_Model:
         new_schedule = Schedule(sch_begin, sch_end, sch_day, gru_id)
         db.session.add(new_schedule)
         db.session.commit()
-        return new_schedule
+        result = schedule_schema.dump(new_schedule)
+        return result
 
     # List a schedule with ID
     def schedule(self, sch_id):

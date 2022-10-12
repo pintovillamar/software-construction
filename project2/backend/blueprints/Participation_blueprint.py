@@ -19,10 +19,10 @@ def create_participation():
     print(request.json['gru_id'])
     print(request.json['std_id'])
     print(request.json['par_val'])
-    content = model.create_participation(request.json['par_date'])
-    content = model.create_participation(request.json['gru_id'])    
-    content = model.create_participation(request.json['std_id'])
-    content = model.create_participation(request.json['par_val'])    
+    content = model.create_participation(request.json['par_date']
+                                        ,request.json['gru_id']
+                                        ,request.json['std_id']
+                                        ,request.json['par_val'])
     return jsonify(content)
 
 # List participation with ID

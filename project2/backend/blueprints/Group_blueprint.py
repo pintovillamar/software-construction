@@ -16,9 +16,10 @@ def create_group():
     print(request.json['tea_id'])
     print(request.json['gru_name'])
     print(request.json['cur_id'])
-    content = model.create_group(request.json['tea_id'])    
-    content = model.create_group(request.json['gru_name']) 
-    content = model.create_group(request.json['cur_id']) 
+    content = model.create_group(request.json['tea_id'],
+                                 request.json['gru_name'],
+                                 request.json['cur_id'])    
+ 
     return jsonify(content)
 
 # List group with ID

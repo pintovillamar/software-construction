@@ -14,8 +14,8 @@ course_blueprint = Blueprint('/courses_blueprint', __name__)
 def create_course():
     print(request.json['cur_name'])
     print(request.json['cur_des'])
-    content = model.create_course(request.json['cur_name'])    
-    content = model.create_course(request.json['cur_des']) 
+    content = model.create_course(request.json['cur_name'],
+                                  request.json['cur_des']) 
     return jsonify(content)
 
 # List course with ID

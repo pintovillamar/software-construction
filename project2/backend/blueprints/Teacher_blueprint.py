@@ -16,9 +16,9 @@ def create_teacher():
     print(request.json['usr_id'])
     print(request.json['tea_type'])
     print(request.json['tea_cat'])
-    content = model.create_teacher(request.json['usr_id'])    
-    content = model.create_teacher(request.json['tea_type']) 
-    content = model.create_teacher(request.json['tea_cat']) 
+    content = model.create_teacher(request.json['usr_id'],
+                                   request.json['tea_type'],
+                                   request.json['tea_cat'])     
     return jsonify(content)
 
 # List teacher with ID
