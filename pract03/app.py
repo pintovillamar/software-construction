@@ -55,9 +55,9 @@ def tasks():
     result = tasks_schema.dump(all_tasks) # lo vuelve serializable
     return jsonify(result)
 
-@app.route('/task/<id>', methods=['POST'])
-def task(id):
-    result = Task.query.get(id)
+@app.route('/task/<ust_id>', methods=['POST'])
+def task(ust_id):
+    result = Task.query.get(ust_id)
     result = task_schema.dump(result) # lo vuelve serializable
     return jsonify(result)
 

@@ -62,13 +62,9 @@ def user_type(id):
 @app.route('/update_user_type/<ust_id>', methods=['POST'])
 def update_user_type(id):
     user_type = User_type.query.get(id)
-
     ust_name = request.json['ust_name']
-
     user_type.ust_name = ust_name
-
     db.session.commit()
-
     return user_type_schema.jsonify(user_type)
 
 
