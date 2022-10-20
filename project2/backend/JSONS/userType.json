@@ -4,5 +4,8 @@
     },
     {
         "ust_name": "Teacher"
+    },
+    {
+        "ust_name": "Admin"
     }
 ]
