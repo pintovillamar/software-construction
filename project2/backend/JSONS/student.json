@@ -1,0 +1,38 @@
+[
+    {
+        "usr_id": 2,
+        "std_regular": 1,
+        "std_year": 2018,
+        "std_vector": null
+    },
+    {
+        "usr_id": 3,
+        "std_regular": 1,
+        "std_year": 2019,
+        "std_vector": null
+    },
+    {
+        "usr_id": 4,
+        "std_regular": 1,
+        "std_year": 2018,
+        "std_vector": null
+    },
+    {
+        "usr_id": 5,
+        "std_regular": 1,
+        "std_year": 2018,
+        "std_vector": null
+    },
+    {
+        "usr_id": 6,
+        "std_regular": 1,
+        "std_year": 2019,
+        "std_vector": null
+    },
+    {
+        "usr_id": 9,
+        "std_regular": 1,
+        "std_year": 2019,
+        "std_vector": null
+    }
+]

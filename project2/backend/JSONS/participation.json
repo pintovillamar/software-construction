@@ -1,0 +1,38 @@
+[
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 2,
+        "std_id": 3,
+        "par_val": 12
+    },
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 1,
+        "std_id": 1,
+        "par_val": 10
+    },
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 1,
+        "std_id": 2,
+        "par_val": 13
+    },
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 2,
+        "std_id": 4,
+        "par_val": 2
+    },
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 2,
+        "std_id": 5,
+        "par_val": 14
+    },
+    {
+        "par_date": "2022-10-10",
+        "gru_id": 1,
+        "std_id": 6,
+        "par_val": 20
+    }
+]
