@@ -1,6 +1,11 @@
 [
     {
-        "usr_id": 10,
+        "usr_id": 1,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 7,
         "tea_type": "research",
         "tea_cat": "contratado"
     },

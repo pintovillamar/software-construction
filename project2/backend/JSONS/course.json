@@ -1,5 +1,13 @@
 [
     {
+        "cur_name": "Construcción de software",
+        "cur_des": "Reconocimiento facial"
+    },
+    {
+        "cur_name": "Ecuaciones diferenciales",
+        "cur_des": "Ecuaciones"
+    },
+    {
         "cur_name": "Computacion distribuida y paralela",
         "cur_des": "Programacion concurrente y paralela"
     },
