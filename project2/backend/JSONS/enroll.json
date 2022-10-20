@@ -1,0 +1,32 @@
+[
+    {
+        "std_id": 2,
+        "gru_id": 1,
+        "enr_date": "2022-09-20"
+    },
+    {
+        "std_id": 3,
+        "gru_id": 2,
+        "enr_date": "2022-09-20"
+    },
+    {
+        "std_id": 4,
+        "gru_id": 3,
+        "enr_date": "2022-09-20"
+    },
+    {
+        "std_id": 5,
+        "gru_id": 4,
+        "enr_date": "2022-09-20"
+    },
+    {
+        "std_id": 6,
+        "gru_id": 5,
+        "enr_date": "2022-09-20"
+    },
+    {
+        "std_id": 9,
+        "gru_id": 6,
+        "enr_date": "2022-09-20"
+    }
+]
