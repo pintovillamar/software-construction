@@ -1,0 +1,32 @@
+[
+    {
+        "tea_id": 1,
+        "gru_name": "CDP-I",
+        "cur_id": 1
+    },
+    {
+        "tea_id": 2,
+        "gru_name": "MetSoft-I",
+        "cur_id": 2
+    },
+    {
+        "tea_id": 3,
+        "gru_name": "ModSoft-I",
+        "cur_id": 3
+    },
+    {
+        "tea_id": 4,
+        "gru_name": "RCD-I",
+        "cur_id": 4
+    },
+    {
+        "tea_id": 5,
+        "gru_name": "PS-I",
+        "cur_id": 5
+    },
+    {
+        "tea_id": 6,
+        "gru_name": "AS-I",
+        "cur_id": 6
+    }
+]
