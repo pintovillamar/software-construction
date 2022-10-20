@@ -1,0 +1,32 @@
+[
+    {
+        "usr_id": 10,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 11,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 12,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 13,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 14,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    },
+    {
+        "usr_id": 15,
+        "tea_type": "research",
+        "tea_cat": "contratado"
+    }
+]
