@@ -1,3 +1,4 @@
+from unittest import result
 from backend.models.connection_pool import getcursor
 from flask import jsonify
 from backend.models.conn import db
@@ -39,7 +40,8 @@ class Enroll_Model:
         new_enroll = Enroll(std_id, gru_id, enr_date)
         db.session.add(new_enroll)
         db.session.commit()
-        return new_enroll
+        result = enroll_schema.dump(new_enroll)
+        return result
     
     # List an enrollment with ID
     def enroll(self, enr_id):
