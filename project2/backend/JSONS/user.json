@@ -1,0 +1,152 @@
+[
+    {
+        "usr_dni": "12457845",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Vicente",
+        "usr_last_name": "Machaca",
+        "usr_dob": "2000-12-31",
+        "usr_email": "vicente@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "66666666",
+        "usr_pass": "lol123",
+        "usr_photo": "",
+        "usr_name": "Jose",
+        "usr_last_name": "Pinto",
+        "usr_dob": "1998-08-01",
+        "usr_email": "jose@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "77207344",
+        "usr_pass": "1234",
+        "usr_photo": "",
+        "usr_name": "Yoshiro",
+        "usr_last_name": "Miranda",
+        "usr_dob": "2002-04-30",
+        "usr_email": "yoshiro@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "73536300",
+        "usr_pass": "puka123",
+        "usr_photo": "",
+        "usr_name": "Isabel",
+        "usr_last_name": "Ttito",
+        "usr_dob": "2000-12-12",
+        "usr_email": "isabel@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "42564852",
+        "usr_pass": "12341",
+        "usr_photo": "",
+        "usr_name": "Kevin",
+        "usr_last_name": "Linares",
+        "usr_dob": "2001-01-30",
+        "usr_email": "kevin@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "71351234",
+        "usr_pass": "12345",
+        "usr_photo": "",
+        "usr_name": "Dante",
+        "usr_last_name": "Tarraga",
+        "usr_dob": "2000-05-06",
+        "usr_email": "dante@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "45781245",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Henry",
+        "usr_last_name": "Torres",
+        "usr_dob": "1993-01-30",
+        "usr_email": "henry@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "12345678",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Admin",
+        "usr_last_name": "Admin",
+        "usr_dob": "1970-01-01",
+        "usr_email": "admin@gmail.com",
+        "ust_id": 3
+    },
+    {
+        "usr_dni": "71632172",
+        "usr_pass": "123456",
+        "usr_photo": "",
+        "usr_name": "Elvis",
+        "usr_last_name": "Cruces",
+        "usr_dob": "2002-06-06",
+        "usr_email": "elvis@gmail.com",
+        "ust_id": 1
+    },
+    {
+        "usr_dni": "15948965",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Alfonso",
+        "usr_last_name": "Chicata",
+        "usr_dob": "2021-12-31",
+        "usr_email": "alfonso@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "25616956",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Maribel",
+        "usr_last_name": "Quiroz",
+        "usr_dob": "2008-12-31",
+        "usr_email": "maribel@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "31565538",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Franco",
+        "usr_last_name": "Tejada",
+        "usr_dob": "2004-12-31",
+        "usr_email": "franco@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "41635158",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Richard",
+        "usr_last_name": "Escobedo",
+        "usr_dob": "1998-12-31",
+        "usr_email": "richard@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "51615894",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Angela",
+        "usr_last_name": "Mayhua",
+        "usr_dob": "2010-12-31",
+        "usr_email": "angela@gmail.com",
+        "ust_id": 2
+    },
+    {
+        "usr_dni": "66148317",
+        "usr_pass": "123",
+        "usr_photo": "",
+        "usr_name": "Paul",
+        "usr_last_name": "Mendoza",
+        "usr_dob": "2003-12-31",
+        "usr_email": "Paul@gmail.com",
+        "ust_id": 2
+    }
+]

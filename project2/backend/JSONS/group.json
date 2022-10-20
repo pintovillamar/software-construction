@@ -1,0 +1,42 @@
+[
+    {
+        "tea_id": 1,
+        "gru_name": "CS-I",
+        "cur_id": 1
+    },
+    {
+        "tea_id": 7,
+        "gru_name": "ED-I",
+        "cur_id": 2
+    },
+    {
+        "tea_id": 10,
+        "gru_name": "CDP-I",
+        "cur_id": 3
+    },
+    {
+        "tea_id": 11,
+        "gru_name": "MetSoft-I",
+        "cur_id": 4
+    },
+    {
+        "tea_id": 12,
+        "gru_name": "ModSoft-I",
+        "cur_id": 5
+    },
+    {
+        "tea_id": 13,
+        "gru_name": "RCD-I",
+        "cur_id": 6
+    },
+    {
+        "tea_id": 14,
+        "gru_name": "TC-I",
+        "cur_id": 7
+    },
+    {
+        "tea_id": 15,
+        "gru_name": "AS-I",
+        "cur_id": 8
+    }
+]
