@@ -1,0 +1,26 @@
+[
+    {
+        "cur_name": "Computacion distribuida y paralela",
+        "cur_des": "Programacion concurrente y paralela"
+    },
+    {
+        "cur_name": "Metodos de software",
+        "cur_des": "Metodologias agiles"
+    },
+    {
+        "cur_name": "Modelos de software",
+        "cur_des": "NLP"
+    },
+    {
+        "cur_name": "Redes y comunicacion de datos",
+        "cur_des": "Conexión de redes"
+    },
+    {
+        "cur_name": "Procesos de software",
+        "cur_des": "Diagramas de casos de uso"
+    },
+    {
+        "cur_name": "Arquitectura de software",
+        "cur_des": "Elaboracion de diagramas"
+    }
+]
