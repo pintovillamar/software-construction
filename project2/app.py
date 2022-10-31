@@ -1,23 +1,20 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
-from flask import render_template
-from flask_cors import CORS, cross_origin # para que no genere errores de CORS al hacer peticiones
+from flask_cors import CORS # para que no genere errores de CORS al hacer peticiones
 from backend.models.conn import app
-import werkzeug.utils
 
 
 from backend.blueprints.User_type_blueprint import user_type_blueprint
 from backend.blueprints.User_blueprint import user_blueprint
-from backend.blueprints.Schedule_blueprint import schedule_blueprint
-from backend.blueprints.Enroll_blueprint import enroll_blueprint
+# from backend.blueprints.Schedule_blueprint import schedule_blueprint
+# from backend.blueprints.Enroll_blueprint import enroll_blueprint
 from backend.blueprints.Student_blueprint import student_blueprint
 from backend.blueprints.Attendances_blueprint import attendance_blueprint
 from backend.blueprints.Group_blueprint import group_blueprint
 from backend.blueprints.Course_blueprint import course_blueprint
 from backend.blueprints.Teacher_blueprint import teacher_blueprint
-from backend.blueprints.Participation_blueprint import participation_blueprint
-from backend.blueprints.face_recognition_blueprint import face_recognition_blueprint
+# from backend.blueprints.Participation_blueprint import participation_blueprint
+# from backend.blueprints.face_recognition_blueprint import face_recognition_blueprint
+# test purposes
+# from backend.blueprints.test_blueprint import test_blueprint
 
 #app = Flask(__name__)
 # para que utilice vue compilado ( npm run build ). En la carpeta dist, esta lo compilado de vue
@@ -25,18 +22,18 @@ from backend.blueprints.face_recognition_blueprint import face_recognition_bluep
 #             static_folder = "./frontend/dist/static",
 #             template_folder = "./frontend/dist")
 
-app.register_blueprint(user_type_blueprint)
-app.register_blueprint(user_blueprint)
-app.register_blueprint(schedule_blueprint)
-app.register_blueprint(enroll_blueprint)
-app.register_blueprint(student_blueprint)
-app.register_blueprint(attendance_blueprint)
-app.register_blueprint(group_blueprint)
-app.register_blueprint(course_blueprint)
-app.register_blueprint(teacher_blueprint)
-app.register_blueprint(participation_blueprint)
-app.register_blueprint(face_recognition_blueprint)
-
+app.register_blueprint(user_type_blueprint) # 1
+app.register_blueprint(user_blueprint) # 2
+# app.register_blueprint(schedule_blueprint)
+# app.register_blueprint(enroll_blueprint)
+app.register_blueprint(student_blueprint) # 3
+app.register_blueprint(attendance_blueprint) # 7
+app.register_blueprint(group_blueprint) # 6
+app.register_blueprint(course_blueprint) # 4* no tiene dependecias
+app.register_blueprint(teacher_blueprint) # 5
+# app.register_blueprint(participation_blueprint)
+# app.register_blueprint(face_recognition_blueprint)
+# app.register_blueprint(test_blueprint)
 
 cors = CORS(app, support_credentials=True)
 
