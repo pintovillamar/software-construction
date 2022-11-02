@@ -9,36 +9,36 @@ from backend.models.User_type_model import User_type
 
 class User(db.Model):
     usr_id = db.Column(db.Integer, primary_key=True)
-    usr_dni = db.Column(db.String(8))
-    usr_pass = db.Column(db.String(16))
-    usr_photo = db.Column(db.String(70))
-    usr_name = db.Column(db.String(70))
-    usr_last_name = db.Column(db.String(70))
+    usr_name = db.Column(db.String(200))
+    usr_last_name = db.Column(db.String(200))
+    usr_dni = db.Column(db.String(200))
+    usr_email = db.Column(db.String(200))
+    usr_passwd = db.Column(db.String(200))
+    usr_photo = db.Column(db.String(200))
     usr_dob = db.Column(db.Date()) # date of birth
-    usr_email = db.Column(db.String(70))
     ust_id = db.Column(db.Integer, db.ForeignKey(User_type.ust_id))
 
-    def __init__(self, usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id): # este se usa para el JSON así que guardarlo
-        self.usr_dni = usr_dni
-        self.usr_pass = usr_pass
-        self.usr_photo = usr_photo
-        self.usr_name = usr_name
-        self.usr_last_name = usr_last_name
-        self.usr_dob = usr_dob
-        self.usr_email = usr_email
-        self.ust_id = ust_id
+    def __init__(self, usr_name, usr_last_name, usr_dni, usr_email, usr_passwd, usr_photo, usr_dob, ust_id): # este se usa para el JSON así que guardarlo
+            self.usr_name = usr_name
+            self.usr_last_name = usr_last_name
+            self.usr_dni = usr_dni
+            self.usr_email = usr_email
+            self.usr_passwd = usr_passwd
+            self.usr_photo = usr_photo
+            self.usr_dob = usr_dob
+            self.ust_id = ust_id
 
 class UserSchema(ma.Schema):
     class Meta:
         fields = (
             'usr_id',
-            'usr_dni',
-            'usr_pass',
-            'usr_photo',
             'usr_name',
             'usr_last_name',
-            'usr_dob',
+            'usr_dni',
             'usr_email',
+            'usr_passwd',
+            'usr_photo',
+            'usr_dob',
             'ust_id'
         )
 
@@ -49,8 +49,9 @@ db.create_all()
 
 class User_Model:
     # Create a user
-    def create_user(self, usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id):
-        new_user = User(usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id)
+    def create_user(self,   usr_name, usr_last_name, usr_dni, usr_email, usr_passwd, usr_photo, usr_dob, ust_id):
+
+        new_user = User(    usr_name, usr_last_name, usr_dni, usr_email, usr_passwd, usr_photo, usr_dob, ust_id)
         db.session.add(new_user)
         db.session.commit()
         result = user_schema.dump(new_user)
@@ -69,15 +70,15 @@ class User_Model:
         return result
 
     # Update user by ID
-    def update_user(self, usr_id, usr_dni, usr_pass, usr_photo, usr_name, usr_last_name, usr_dob, usr_email, ust_id):
+    def update_user(self, usr_id, usr_name, usr_last_name, usr_dni, usr_email, usr_passwd, usr_photo, usr_dob, ust_id):
         user = User.query.get(usr_id)
-        user.usr_dni = usr_dni
-        user.usr_pass = usr_pass
-        user.usr_photo = usr_photo
         user.usr_name = usr_name
         user.usr_last_name = usr_last_name
-        user.usr_dob = usr_dob
+        user.usr_dni = usr_dni
         user.usr_email = usr_email
+        user.usr_pass = usr_passwd
+        user.usr_photo = usr_photo
+        user.usr_dob = usr_dob
         user.ust_id = ust_id
         db.session.commit()
         result = user_schema.dump(user)
