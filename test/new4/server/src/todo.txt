@@ -1,0 +1,15 @@
+- instalar requirements.txt con pip install -r requirements
+- cambiar todos los prefijos EJEMPLO "ust_id" por "id", "cur_name" por "name"
+- usar el siguiente código para todos los blueprints de un archivo
+
+# @UserBlueprint.before_request
+# def verify_token_middleware():
+#     token = request.headers['Authorization'].split(" ")[1]
+#     return validate_token(token,output=False)
+
+- chagelogs:
+    * cambio de nombre de variables
+    * cambio de nombre "backend" a "server"
+    * auth added
+    * routes para verificacion
+
