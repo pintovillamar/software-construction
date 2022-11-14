@@ -1,6 +1,7 @@
 - instalar requirements.txt con pip install -r requirements
 - cambiar todos los prefijos EJEMPLO "ust_id" por "id", "cur_name" por "name"
 - usar el siguiente código para todos los blueprints de un archivo
+- actualizar el path de fotos en Users con su directorio EJEMPLO: C:/path/to/images
 
 # @UserBlueprint.before_request
 # def verify_token_middleware():
