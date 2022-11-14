@@ -1,0 +1,10 @@
+[
+    {
+        "name" : "jose",
+        "last_name": "pinto",
+        "dni": "12345678",
+        "email": "jose@ulasalle.edu.pe",
+        "password": "pass123",
+        "user_type_id": "2"
+    }
+]
