@@ -16,44 +16,56 @@ from datetime import datetime, timedelta
 
 from models.User_model import UserModel, User
 
-from auth.auth_jwt import validate_token
-
 model = UserModel()
 
+# tokens 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
 
-# def token_required(f):
-#     @wraps(f)
-#     def decorated(*args, **kwargs):
-#         token = None
-
-#         if "x-access-token" in request.headers:
-#             token = request.headers["x-access-token"]
+        if "x-access-token" in request.headers:
+            token = request.headers["x-access-token"]
         
-#         if not token:
-#             return jsonify({"message": "Token is missing!"}), 401
+        if not token:
+            return jsonify({"message": "Token is missing!"}), 401
 
-#         try:
-#             data = jwt.decode(token, app.config["SECRET_KEY"])
-#             current_user = User.query.filter_by(id=data["id"]).first()
-#         except:
-#             return jsonify({"message": "Token is invalid!"}), 401
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
+            current_user = User.query.filter_by(id=data["id"]).first()
+            print(current_user)
+        except:
+            return jsonify({"message": "Token is invalid!"}), 401
 
-#         return f(current_user, *args, **kwargs)
+        return f(current_user, *args, **kwargs)
 
-#     return decorated
-
+    return decorated
 
 UserBlueprint = Blueprint("UserBlueprint", __name__)
 
+# Login 
+@UserBlueprint.route("/login", methods=["GET"])
+@cross_origin()
+def login():
+    auth = request.authorization
 
-# BEFORE REQUEST PARA AUTH
-@UserBlueprint.before_request
-def verify_token_middleware():
-    token = request.headers['Authorization'].split(" ")[1]
-    return validate_token(token,output=False)
+    if not auth or not auth.username or not auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
+    
+    user = User.query.filter_by(email=auth.username).first()
+
+    if not user:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
+
+    if user.password == auth.password:
+        token = jwt.encode({'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes = 30)}, app.config["SECRET_KEY"])
+        
+        return jsonify({'token': token})
+    
+    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
 
 @UserBlueprint.route("/create_user", methods=["POST"])
-# # @token_required
+@token_required
 @cross_origin()
 def create_user():
     # photo upload process
@@ -96,20 +108,23 @@ def create_user():
     return jsonify(content)
 
 @UserBlueprint.route("/user/<id>", methods=["GET"])
-# @token_required
+@token_required
 @cross_origin()
 def user(id):
     content = model.user(id)
     return jsonify(content)
 
 @UserBlueprint.route("/users", methods=["GET"])
+@token_required
 @cross_origin()
-def users():
-    content = model.users()
-    return jsonify(content)
+def users(current_user):
+    if current_user.user_type_id == 1:
+        content = model.users()
+        return jsonify(content)
+    return jsonify({"message": "You are not authorized to view this page!"})
     
 @UserBlueprint.route("/update_user/<id>", methods=["PUT"])
-# @token_required
+@token_required
 @cross_origin()
 def update_user(id):
     user_created = User.query.get(id)
@@ -149,33 +164,10 @@ def update_user(id):
     return jsonify(model.update_user(content))
 
 @UserBlueprint.route("/delete_user/<id>", methods=["DELETE"])
-# @token_required
+@token_required
 @cross_origin()
 def delete_user(id):
     return jsonify(model.delete_user(id))
-
-# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjE0LCJleHAiOjE2Njg0NDgyMjJ9.-wjpn2Wh_mWgNhHFKYdu1mqC2SOxDqJlrp4xLmVgBrA
-
-# @UserBlueprint.route("/login", methods=["GET"])
-# @cross_origin()
-# def login():
-#     auth = request.authorization
-
-#     if not auth or not auth.username or not auth.password:
-#         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
-    
-#     user = User.query.filter_by(email=auth.username).first()
-
-#     if not user:
-#         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
-
-#     if user.password == auth.password:
-#         token = jwt.encode({'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes = 30)}, app.config["SECRET_KEY"])
-        
-#         return jsonify({'token': token})
-    
-#     return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm: "login required!"'})
-
 
 def rename_pic(id):
     user_id = id    
