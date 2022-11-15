@@ -1,5 +1,6 @@
 from database import db, ma
 from flask import Flask
+from flask import jsonify
 
 from models.Group_model import Group
 from models.Student_model import Student
