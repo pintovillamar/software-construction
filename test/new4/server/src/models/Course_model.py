@@ -9,10 +9,14 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     des = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, name, des):
+    def __init__(self, name, des, created_at, updated_at):
         self.name = name
         self.des = des
+        self.created_at = created_at
+        self.updated_at = updated_at
 
     def __repr__(self):
         return f"Course {self.name}"
@@ -22,7 +26,9 @@ class CourseSchema(ma.Schema):
         fields = ( 
             "id",
             "name",
-            "des"
+            "des",
+            "created_at",
+            "updated_at"
         )
     
 course_schema = CourseSchema()
@@ -30,8 +36,8 @@ courses_schema = CourseSchema(many=True)
 
 class CourseModel:
 
-    def create_course(self, name, des):
-        new_course = Course(name, des)
+    def create_course(self, name, des, created_at, updated_at):
+        new_course = Course(name, des, created_at, updated_at)
         db.session.add(new_course)
         db.session.commit()
         return course_schema.dump(new_course)
@@ -44,10 +50,12 @@ class CourseModel:
         courses = Course.query.all()
         return courses_schema.dump(courses)
     
-    def update_course(self, id, name, des):
+    def update_course(self, id, name, des, created_at, updated_at):
         course = Course.query.get(id)
         course.name = name
         course.des = des
+        course.created_at = created_at
+        course.updated_at = updated_at
         db.session.commit()
         return course_schema.dump(course)
 
