@@ -35,7 +35,7 @@ def create_teacher():
     cat = request.json["cat"]
     created_at = datetime.now()
     updated_at = datetime.now()
-    return jsonify(model.create_user_type(user_id, type, cat, created_at, updated_at))
+    return jsonify(model.create_teacher(user_id, type, cat, created_at, updated_at))
 
 @TeacherBlueprint.route("/teacher/<id>", methods=["GET"])
 # @token_required
@@ -60,7 +60,7 @@ def update_teacher(id):
     cat = request.json["cat"]
     created_at = teacher_created.created_at
     updated_at = datetime.now()
-    return jsonify(model.update_user_type(id, user_id, type, cat, created_at ,updated_at))
+    return jsonify(model.update_teacher(id, user_id, type, cat, created_at ,updated_at))
 
 @TeacherBlueprint.route("/delete_teacher/<id>", methods=["DELETE"])
 # @token_required
