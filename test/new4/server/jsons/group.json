@@ -1,0 +1,42 @@
+[
+    {
+        "teacher_id": 1,
+        "name": "CS-I",
+        "course_id": 1
+    },
+    {
+        "teacher_id": 7,
+        "name": "ED-I",
+        "course_id": 2
+    },
+    {
+        "teacher_id": 10,
+        "name": "CDP-I",
+        "course_id": 3
+    },
+    {
+        "teacher_id": 11,
+        "name": "MetSoft-I",
+        "course_id": 4
+    },
+    {
+        "teacher_id": 12,
+        "name": "ModSoft-I",
+        "course_id": 5
+    },
+    {
+        "teacher_id": 13,
+        "name": "RCD-I",
+        "course_id": 6
+    },
+    {
+        "teacher_id": 14,
+        "name": "TC-I",
+        "course_id": 7
+    },
+    {
+        "teacher_id": 15,
+        "name": "AS-I",
+        "course_id": 8
+    }
+]

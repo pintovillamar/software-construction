@@ -1,0 +1,39 @@
+[
+    {
+        "date": "2022-10-10",
+        "group_id": 2,
+        "student_id": 3,
+        "valor": true
+    },
+    {
+        "att_date": "2022-10-10",
+        "group_id": 1,
+        "student_id": 1,
+        "valor": true
+    },
+    {
+        "att_date": "2022-10-10",
+        "group_id": 1,
+        "student_id": 2,
+        "valor": true
+    },
+    {
+        "att_date": "2022-10-10",
+        "group_id": 2,
+        "student_id": 4,
+        "valor": true
+    },
+    {
+        "att_date": "2022-10-10",
+        "group_id": 2,
+        "student_id": 5,
+        "valor": true
+    },
+    {
+        "att_date": "2022-10-10",
+        "group_id": 1,
+        "student_id": 6,
+        "valor": false
+    }
+    
+]

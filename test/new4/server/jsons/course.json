@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Construcción de software",
+        "des": "Reconocimiento facial"
+    },
+    {
+        "name": "Ecuaciones diferenciales",
+        "des": "Ecuaciones"
+    },
+    {
+        "name": "Computacion distribuida y paralela",
+        "des": "Programacion concurrente y paralela"
+    },
+    {
+        "name": "Metodos de software",
+        "des": "Metodologias agiles"
+    },
+    {
+        "name": "Modelos de software",
+        "des": "NLP"
+    },
+    {
+        "name": "Redes y comunicacion de datos",
+        "des": "Conexión de redes"
+    },
+    {
+        "name": "Teoria de la computacion",
+        "des": "Nodos"
+    },
+    {
+        "name": "Arquitectura de software",
+        "des": "Elaboracion de diagramas"
+    }
+]
