@@ -69,7 +69,7 @@ class Group_Model:
     
     def groups(self):
         groups = Group.query.all()
-        result = group_schema.dump(groups)
+        result = groups_schema.dump(groups)
         return jsonify(result)
     
     def update_group(self, id):

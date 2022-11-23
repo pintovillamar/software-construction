@@ -179,3 +179,7 @@ pract06-frontend/hello/config/dev.env.js
 pract06-frontend/hello/config/index.js
 pract06-frontend/hello/config/prod.env.js
 .gitignore
+
+#yoshiro
+
+test/dashboards/dashboard-mine/dash/node_modules/
