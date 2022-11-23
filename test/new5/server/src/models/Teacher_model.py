@@ -84,4 +84,4 @@ class Teacher_Model:
         last_name = query_user.usr_last_name
         
         
-        return jsonify(new_id, name, last_name)
+        return jsonify({'id': new_id, 'title': name})
