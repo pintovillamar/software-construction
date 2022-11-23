@@ -75,15 +75,24 @@ class Teacher_Model:
         db.session.commit()
         return teacher_schema.jsonify(teacher)
 
-    def get_teacher_combobox(self, id):        
+    def get_teacher_combobox(self):        
         # query_teacher = Teacher.query.filter_by(usr_id=query_user.usr_id).first()
         # query_user = User.query.filter_by(usr_id=id).first()
-        query_teacher = Teacher.query.filter_by(tea_id=id).first()
-        query_user = User.query.filter_by(usr_id=query_teacher.usr_id).first()
+        # query_teacher = Teacher.query.filter_by(tea_id=id).first()
+        # query_user = User.query.filter_by(usr_id=query_teacher.usr_id).first()
+        result = []
 
-        new_id = query_teacher.tea_id
-        name = query_user.usr_name
-        last_name = query_user.usr_last_name
+        query_all_teachers = Teacher.query.all()
+        for name in query_all_teachers:
+            query_user = User.query.filter_by(usr_id=name.usr_id).first()
+            result.append({"id": name.tea_id ,"title": query_user.usr_name + ' ' + query_user.usr_last_name })
+            
+        return jsonify(result)
+
+        
+        # new_id = query_all.tea_id
+        # name = query_all.usr_name
+        # last_name = query_all.usr_last_name
         
         
-        return jsonify({'id': new_id, 'title': name + " " + last_name})
+        # return jsonify({'tea_id': new_id, 'title': name + " " + last_name})
