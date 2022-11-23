@@ -1,11 +1,9 @@
 from flask import jsonify
-from database import db
-from database import ma
+from app import db, ma
 
 from werkzeug.utils import secure_filename
 
 class User(db.Model):
-    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
@@ -13,6 +11,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     photo = db.Column(db.Text, nullable=True)
+    dob = db.Column(db.String(255), nullable=False)
     user_type_id = db.Column(db.Integer, db.ForeignKey("user_type.id"), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)

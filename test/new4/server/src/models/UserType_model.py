@@ -1,11 +1,10 @@
 from flask import jsonify
-from database import db
-from database import ma
 
 from werkzeug.utils import secure_filename
 
+from database import db, ma
+
 class UserType(db.Model):
-    __tablename__ = "user_type"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
