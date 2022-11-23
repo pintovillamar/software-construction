@@ -23,24 +23,26 @@
                 label="Name"
                 required
               ></v-text-field>
-              <v-combobox
+              <v-autocomplete
                 ref="tea_id"
                 :headers="headers_teachers"
-                :items="teachers"
+                :items="headers_teachers"
                 v-model="newGroup.tea_id"
                 :rules="[() => !!Teacher || 'This field is required']"
                 :error-messages="errorMessages"
                 label="Teacher"
                 required
-              ></v-combobox>
-              <v-text-field
+              ></v-autocomplete>
+              <v-autocomplete
                 ref="cur_id"
+                
+                :items="headers_courses"
                 v-model="newGroup.cur_id"
                 :rules="[() => !!Course || 'This field is required']"
                 :error-messages="errorMessages"
                 label="Course"
                 required
-              ></v-text-field>
+              ></v-autocomplete>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -153,6 +155,8 @@ import axios from 'axios';
         ],
         groups: [],
         teachers: [],
+        corses:[],
+        headers_courses: [{value:"cur_id"}],
         headers_teachers: [{value:"tea_id"}],
         newGroup: {},
         URL: 'http://localhost:5000',
@@ -188,6 +192,10 @@ import axios from 'axios';
 
         axios.get(this.URL + '/teachers')
         .then((res) => { this.teachers = res.data; })
+        .catch((err) => { console.log(err); })
+
+        axios.get(this.URL + '/courses')
+        .then((res) => { this.courses = res.data; })
         .catch((err) => { console.log(err); })
     },
 

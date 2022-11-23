@@ -93,11 +93,15 @@
                 required
             ></v-text-field>
             <v-text-field
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 ref="usr_password"
+                :type="show1 ? 'text' : 'password'"
                 v-model="newUser.usr_password"
                 :rules="[() => !!description || 'This field is required']"
                 :error-messages="errorMessages"
                 label="Contraseña"
+                @click:append="show1 = !show1"
+                
                 required
             ></v-text-field>
             <!-- <v-text-field
