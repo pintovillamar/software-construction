@@ -62,7 +62,9 @@
                 @click="addUserType"
               >
                 Submit
+              
               </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-col>
