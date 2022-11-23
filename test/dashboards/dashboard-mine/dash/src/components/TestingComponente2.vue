@@ -61,7 +61,7 @@
                 ></v-text-field>
                 </template>
                 <v-date-picker
-                v-model="newUser.ust_dob"
+                v-model="date"
                 no-title
                 scrollable
                 >
