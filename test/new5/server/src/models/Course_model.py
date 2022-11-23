@@ -62,3 +62,12 @@ class Course_Model:
         db.session.delete(course)
         db.session.commit()
         return course_schema.jsonify(course)
+
+    def get_course_combobox(self):
+        # name
+        result = []
+        query_all_courses = Course.query.all()
+        for name in query_all_courses:
+            result.append({"id": name.cur_id, "title": name.cur_name})
+        
+        return jsonify(result)

@@ -30,3 +30,8 @@ def update_course(id):
 @cross_origin()
 def delete_course(id):
     return model.delete_course(id)
+
+@course_blueprint.route('/get_course_combobox', methods=['GET'])
+@cross_origin()
+def get_course_combobox():
+    return model.get_course_combobox()
