@@ -1,7 +1,5 @@
 from flask import Blueprint
-from flask import request
-from flask import jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 
 from models.UserType_model import User_Type_Model
 model = User_Type_Model()
