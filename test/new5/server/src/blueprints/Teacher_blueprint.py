@@ -32,3 +32,8 @@ def update_teacher(id):
 @cross_origin()
 def delete_teacher(id):
     return model.delete_teacher(id)
+
+@teacher_blueprint.route('/get_teacher_combobox/<id>', methods=['GET'])
+@cross_origin()
+def get_teacher_combobox(id):
+    return model.get_teacher_combobox(id)
