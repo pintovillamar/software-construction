@@ -2,8 +2,10 @@ from flask import jsonify
 from database import db
 from database import ma
 from flask import request
+from dotenv import load_dotenv
 import datetime
 import json
+import os
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -49,7 +51,7 @@ class User_Model:
     def create_user(self):
         f = request.files['file']
         filename = secure_filename(f.filename)
-        path = '/home/jose/Documents/software-construction/test/new5/server/images/uploaded/' + filename
+        path = os.getenv("CUSTOM_FOLDER_IMAGES") + filename
         f.save(path)
         data = json.loads(request.form['data'])
         new_user = User(
@@ -80,7 +82,7 @@ class User_Model:
     def update_user(self, id):
         user = User.query.get(id)
         f = request.files['photo']
-        path = '/home/jose/Documents/software-construction/test/new5/server/images/uploaded/' + f.filename
+        path = os.getenv("CUSTOM_FOLDER_IMAGES") + f.filename
         f.save(path)
         data = json.loads(request.form['data'])
         user.usr_name = data['usr_name']
