@@ -7,7 +7,7 @@
         "usr_last_name": "Machaca",
         "usr_dob": "2000-12-31",
         "usr_email": "vicente@gmail.com",
-        "ust_id": 2
+        "ust_id": 3
     },
     {
         "usr_dni": "66666666",
@@ -17,7 +17,7 @@
         "usr_last_name": "Pinto",
         "usr_dob": "1998-08-01",
         "usr_email": "jose@gmail.com",
-        "ust_id": 1
+        "ust_id": 2
     },
     {
         "usr_dni": "77207344",
