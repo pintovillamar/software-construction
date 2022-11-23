@@ -76,12 +76,14 @@ class Teacher_Model:
         return teacher_schema.jsonify(teacher)
 
     def get_teacher_combobox(self, id):        
-        query_user = User.query.filter_by(usr_id=id).first()
-        query_teacher = Teacher.query.filter_by(usr_id=query_user.usr_id).first()
-        print(query_user.usr_name)
+        # query_teacher = Teacher.query.filter_by(usr_id=query_user.usr_id).first()
+        # query_user = User.query.filter_by(usr_id=id).first()
+        query_teacher = Teacher.query.filter_by(tea_id=id).first()
+        query_user = User.query.filter_by(usr_id=query_teacher.usr_id).first()
+
         new_id = query_teacher.tea_id
         name = query_user.usr_name
         last_name = query_user.usr_last_name
         
         
-        return jsonify({'id': new_id, 'title': name})
+        return jsonify({'id': new_id, 'title': name + " " + last_name})
