@@ -18,23 +18,21 @@
               <v-text-field
                 ref="ust_name"
                 v-model="newUserType.ust_name"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
+                
                 label="Rol"
                 required
               ></v-text-field>
               <v-text-field
                 ref="ust_desc"
                 v-model="newUserType.ust_desc"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
+                
                 label="Descripción"
                 required
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
-                Cancel
+                Clear
               </v-btn>
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
@@ -168,6 +166,9 @@ import axios from 'axios';
           .catch((err) => { console.log(err); })
         }
     },
+    clear () {
+      this.newUserType.ust_name = '';
+      },
     created() {
         axios.get(this.URL + '/user_types')
         .then((res) => { this.user_types = res.data; })
