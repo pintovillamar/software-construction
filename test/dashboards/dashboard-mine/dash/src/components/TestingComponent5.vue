@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="text-center" >
             <v-col>
-                <h1>Tabla Group</h1>
+                <h1>Tabla Teacher</h1>
             </v-col>
         </v-row>
 
@@ -16,31 +16,30 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="gru_name"
-                v-model="newGroup.gru_name"
+                ref="tea_type"
+                v-model="newTeacher.tea_type"
                 :rules="[() => !!name || 'This field is required']"
                 :error-messages="errorMessages"
-                label="Name"
+                label="Tipo"
                 required
               ></v-text-field>
-              <v-combobox
-                v-model="newGroup.tea_id"
-                :items="teachers"
-                item-text="title"
-                item-value="id"
-                label="Teacher"          
-                outlined
-                dense
-              ></v-combobox>
-              <v-combobox
-                v-model="newGroup.cur_id"
-                :items="courses"
-                item-text="title"
-                item-value="id"
-                label="Courses"          
-                outlined
-                dense
-              ></v-combobox>
+              <v-text-field
+                ref="tea_cat"
+                v-model="newTeacher.tea_cat"
+                :rules="[() => !!description || 'This field is required']"
+                :error-messages="errorMessages"
+                label="Categoria"
+                required
+              ></v-text-field>
+              <v-autocomplete
+                ref="usr_id"
+                :items="headers_user"
+                v-model="newTeacher.usr_id"
+                :rules="[() => !!description || 'This field is required']"
+                :error-messages="errorMessages"
+                label="User"
+                required
+              ></v-autocomplete>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -69,10 +68,12 @@
               <v-btn
                 color="primary"
                 text
-                @click="addGroup"
+                @click="addTeacher"
               >
                 Submit
+              
               </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-col>
@@ -82,7 +83,7 @@
             <v-col>
                 <v-card>
                     <v-card-title>
-                    Roles
+                    Tabla Cursos
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -94,7 +95,7 @@
                     </v-card-title>
                     <v-data-table
                     :headers="headers"
-                    :items="groups"
+                    :items="teachers"
                     :search="search"
                     >
                     <template v-slot:item.action="{item}">
@@ -104,7 +105,7 @@
                       dark
                       x-small
                       color="error"
-                      @click="deleteGroup(item)"
+                      @click="deleteCourse(item)"
                       >
                       <v-icon>mdi-delete</v-icon>
                       </v-btn>
@@ -128,23 +129,22 @@ import axios from 'axios';
         search: '',
         headers: [
           {
-            text: 'Name',
+            text: 'Rol',
             align: 'start',
             sortable: false,
-            value: 'gru_name',
+            value: 'tea_type',
           },
-          
-          { text: 'Teacher', sortable: false, value: 'tea_id'},
-          { text: 'Course', sortable: false, value: 'cur_id' },
+          { text: 'Description', sortable: false, value: 'tea_cat' },
+          { text: 'User', sortable: false, value: 'usr_id' },
           {
             text: 'Created at',
             sortable: false,
-            value: 'gru_created',
+            value: 'tea_created',
           },
           {
             text: 'Updated at',
             sortable: false,
-            value: 'gru_updated',
+            value: 'tea_updated',
           },
           {
             text: 'Actions',
@@ -152,13 +152,10 @@ import axios from 'axios';
             value: 'action',
           }
         ],
-        groups: [],
         teachers: [],
-        courses:[],
-        users:[],
-        // headers_courses: [{value:"cur_id"}],
-        // headers_teachers: [{value:"tea_id"}],
-        newGroup: {},
+        newTeacher: {},
+        user:[],
+        headers_user: [{value:"usr_id"}],
         URL: 'http://localhost:5000',
         config_request: {
             'Content-Type': 'application/json',
@@ -167,47 +164,29 @@ import axios from 'axios';
       }
     },
     methods: {
-        addGroup() {
-          var data = {
-            gru_name:this.newGroup.gru_name,
-            tea_id:this.newGroup.tea_id.id,
-            cur_id:this.newGroup.cur_id.id,
-          }
-          axios.post(this.URL + '/create_group', data, this.config_request)
+        addTeacher() {
+          axios.post(this.URL + '/create_teacher', this.newTeacher, this.config_request)
           .then((res) => {
-            this.groups.push(res.data);
+            this.teachers.push(res.data);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
-          this.newGroup = {};
+          this.newTeacher = {};
         },
-        deleteGroup(item) {
-          axios.delete(this.URL + '/delete_group/' + item.gru_id, this.config_request)
+        deleteTeacher(item) {
+          axios.delete(this.URL + '/delete_teacher/' + item.cur_id, this.config_request)
           .then((res) => {
-            this.groups.splice(this.groups.indexOf(item), 1);
+            this.teachers.splice(this.teachers.indexOf(item), 1);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
         }
     },
     created() {
-        axios.get(this.URL + '/groups')
-        .then((res) => { this.groups = res.data; })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/users')
-        .then((res) => { this.users = res.data; })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/get_teacher_combobox')
-        .then((res) => { this.teachers = res.data; console.log(this.teachers) })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/get_course_combobox')
-        .then((res) => { this.courses = res.data; })
+        axios.get(this.URL + '/teachers')
+        .then((res) => { this.teachers = res.data; })
         .catch((err) => { console.log(err); })
     },
-
     
   }
 </script>
