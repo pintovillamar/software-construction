@@ -66,7 +66,7 @@
         Asistencia © Universidad La Salle {{ new Date().getFullYear() }} | Hecho con <a href="https://vuetifyjs.com/">Vuetify</a>.
       </v-card-text>
     </v-card>
-  </v-footer> -->patternspatterns
+  </v-footer> -->
 
   </v-app>
 </template>
@@ -79,7 +79,8 @@
           { title: 'Inicio', icon: 'mdi-home-account',to: '/', color: 'blue'},
           { title: 'Asistencia', icon: 'mdi-checkbox-marked-circle',to: '/asistencia', color:'green'},
           { title: 'Acerca', icon: 'mdi-help',to: "/about", color:'purple'},
-          { title: 'Testing Enviroment', icon: 'mdi-test-tube',to: "/test", color:'orange'}
+          { title: 'Testing Enviroment', icon: 'mdi-test-tube',to: "/test", color:'orange'},
+          { title: 'Face Detection', icon: 'mdi-face-recognition',to: "/face", color:'red'}
         ]
     }),
   }
