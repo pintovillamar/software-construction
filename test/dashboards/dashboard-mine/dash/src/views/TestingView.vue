@@ -9,6 +9,10 @@
 		<testing-component4/>
 
 		<TestingComponent5/>
+
+		<TestingComponent6/>
+
+		<TestingComponent7/>
 	</div>
 </template>
 
@@ -18,6 +22,8 @@
 	import TestingComponent3 from '@/components/TestingComponent3.vue';
 	import TestingComponent4 from '@/components/TestingComponent4.vue';
 	import TestingComponent5 from '@/components/TestingComponent5.vue';
+	import TestingComponent6 from '@/components/TestingComponent6.vue';
+	import TestingComponent7 from '@/components/TestingComponent7.vue';
 	
 	export default {
 		name: 'Testing',
@@ -28,6 +34,8 @@
     TestingComponent3,
     TestingComponent4,
     TestingComponent5,
+    TestingComponent6,
+	TestingComponent7
 }
 	}
 </script>
