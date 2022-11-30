@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="text-center" >
             <v-col>
-                <h1>Tabla Teacher</h1>
+                <h1>Tabla Enroll</h1>
             </v-col>
         </v-row>
 
@@ -16,30 +16,23 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="tea_type"
-                v-model="newTeacher.tea_type"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Tipo"
+                ref="enr_date"
+                v-model="newEnroll.enr_date"
+                label="Date"
                 required
               ></v-text-field>
               <v-text-field
-                ref="tea_cat"
-                v-model="newTeacher.tea_cat"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Categoria"
+                ref="std_id"
+                v-model="newEnroll.std_id"
+                label="Student"
                 required
               ></v-text-field>
-              <v-autocomplete
-                ref="usr_id"
-                :items="headers_user"
-                v-model="newTeacher.usr_id"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="User"
+              <v-text-field
+                ref="gru_id"
+                v-model="newEnroll.gru_id"
+                label="Grupo"
                 required
-              ></v-autocomplete>
+              ></v-text-field>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -48,7 +41,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -68,7 +60,7 @@
               <v-btn
                 color="primary"
                 text
-                @click="addTeacher"
+                @click="addEnroll"
               >
                 Submit
               
@@ -83,7 +75,7 @@
             <v-col>
                 <v-card>
                     <v-card-title>
-                    Tabla Cursos
+                    Tabla Enroll
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -95,7 +87,7 @@
                     </v-card-title>
                     <v-data-table
                     :headers="headers"
-                    :items="teachers"
+                    :items="enrolls"
                     :search="search"
                     >
                     <template v-slot:item.action="{item}">
@@ -105,7 +97,7 @@
                       dark
                       x-small
                       color="error"
-                      @click="deleteCourse(item)"
+                      @click="deleteEnroll(item)"
                       >
                       <v-icon>mdi-delete</v-icon>
                       </v-btn>
@@ -132,19 +124,19 @@ import axios from 'axios';
             text: 'Rol',
             align: 'start',
             sortable: false,
-            value: 'tea_type',
+            value: 'enr_date',
           },
-          { text: 'Description', sortable: false, value: 'tea_cat' },
-          { text: 'User', sortable: false, value: 'usr_id' },
+          { text: 'Description', sortable: false, value: 'std_id' },
+          { text: 'User', sortable: false, value: 'gru_id' },
           {
             text: 'Created at',
             sortable: false,
-            value: 'tea_created',
+            value: 'enr_created',
           },
           {
             text: 'Updated at',
             sortable: false,
-            value: 'tea_updated',
+            value: 'enr_updated',
           },
           {
             text: 'Actions',
@@ -152,8 +144,8 @@ import axios from 'axios';
             value: 'action',
           }
         ],
-        teachers: [],
-        newTeacher: {},
+        enrolls: [],
+        newEnroll: {},
         user:[],
         headers_user: [{value:"usr_id"}],
         URL: 'http://localhost:5000',
@@ -164,27 +156,30 @@ import axios from 'axios';
       }
     },
     methods: {
-        addTeacher() {
-          axios.post(this.URL + '/create_teacher', this.newTeacher, this.config_request)
+        addEnroll() {
+          axios.post(this.URL + '/create_enroll', this.newEnroll, this.config_request)
           .then((res) => {
-            this.teachers.push(res.data);
+            this.enrolls.push(res.data);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
-          this.newTeacher = {};
+          this.newEnroll = {};
         },
-        deleteTeacher(item) {
-          axios.delete(this.URL + '/delete_teacher/' + item.cur_id, this.config_request)
+        deleteEnroll(item) {
+          axios.delete(this.URL + '/delete_enroll/' + item.enr_id, this.config_request)
           .then((res) => {
-            this.teachers.splice(this.teachers.indexOf(item), 1);
+            this.enrolls.splice(this.enrolls.indexOf(item), 1);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        resetForm() {
+          this.newEnroll = {};
         }
     },
     created() {
-        axios.get(this.URL + '/teachers')
-        .then((res) => { this.teachers = res.data; })
+        axios.get(this.URL + '/enrolls')
+        .then((res) => { this.enrolls = res.data; })
         .catch((err) => { console.log(err); })
     },
     

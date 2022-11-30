@@ -18,16 +18,12 @@
               <v-text-field
                 ref="cur_name"
                 v-model="newCourse.cur_name"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Name"
                 required
               ></v-text-field>
               <v-text-field
                 ref="cur_desc"
                 v-model="newCourse.cur_desc"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Descripción"
                 required
               ></v-text-field>
@@ -39,7 +35,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -168,6 +163,9 @@ import axios from 'axios';
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        resetForm(){
+          this.newCourse = {};
         }
     },
     created() {

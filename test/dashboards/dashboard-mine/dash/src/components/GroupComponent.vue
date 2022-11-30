@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="text-center" >
             <v-col>
-                <h1>Tabla Enroll</h1>
+                <h1>Tabla Group</h1>
             </v-col>
         </v-row>
 
@@ -16,29 +16,29 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="enr_date"
-                v-model="newEnroll.enr_date"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Date"
+                ref="gru_name"
+                v-model="newGroup.gru_name"
+                label="Name"
                 required
               ></v-text-field>
-              <v-text-field
-                ref="std_id"
-                v-model="newEnroll.std_id"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Student"
-                required
-              ></v-text-field>
-              <v-text-field
-                ref="gru_id"
-                v-model="newEnroll.gru_id"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Grupo"
-                required
-              ></v-text-field>
+              <v-combobox
+                v-model="newGroup.tea_id"
+                :items="teachers"
+                item-text="title"
+                item-value="id"
+                label="Teacher"          
+                outlined
+                dense
+              ></v-combobox>
+              <v-combobox
+                v-model="newGroup.cur_id"
+                :items="courses"
+                item-text="title"
+                item-value="id"
+                label="Courses"          
+                outlined
+                dense
+              ></v-combobox>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -47,7 +47,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -67,12 +66,10 @@
               <v-btn
                 color="primary"
                 text
-                @click="addEnroll"
+                @click="addGroup"
               >
                 Submit
-              
               </v-btn>
-              
             </v-card-actions>
           </v-card>
         </v-col>
@@ -82,7 +79,7 @@
             <v-col>
                 <v-card>
                     <v-card-title>
-                    Tabla Enroll
+                    Roles
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -94,7 +91,7 @@
                     </v-card-title>
                     <v-data-table
                     :headers="headers"
-                    :items="enrolls"
+                    :items="groups"
                     :search="search"
                     >
                     <template v-slot:item.action="{item}">
@@ -104,7 +101,7 @@
                       dark
                       x-small
                       color="error"
-                      @click="deleteEnroll(item)"
+                      @click="deleteGroup(item)"
                       >
                       <v-icon>mdi-delete</v-icon>
                       </v-btn>
@@ -128,22 +125,23 @@ import axios from 'axios';
         search: '',
         headers: [
           {
-            text: 'Rol',
+            text: 'Name',
             align: 'start',
             sortable: false,
-            value: 'enr_date',
+            value: 'gru_name',
           },
-          { text: 'Description', sortable: false, value: 'std_id' },
-          { text: 'User', sortable: false, value: 'gru_id' },
+          
+          { text: 'Teacher', sortable: false, value: 'tea_id'},
+          { text: 'Course', sortable: false, value: 'cur_id' },
           {
             text: 'Created at',
             sortable: false,
-            value: 'enr_created',
+            value: 'gru_created',
           },
           {
             text: 'Updated at',
             sortable: false,
-            value: 'enr_updated',
+            value: 'gru_updated',
           },
           {
             text: 'Actions',
@@ -151,10 +149,13 @@ import axios from 'axios';
             value: 'action',
           }
         ],
-        enrolls: [],
-        newEnroll: {},
-        user:[],
-        headers_user: [{value:"usr_id"}],
+        groups: [],
+        teachers: [],
+        courses:[],
+        users:[],
+        // headers_courses: [{value:"cur_id"}],
+        // headers_teachers: [{value:"tea_id"}],
+        newGroup: {},
         URL: 'http://localhost:5000',
         config_request: {
             'Content-Type': 'application/json',
@@ -163,29 +164,50 @@ import axios from 'axios';
       }
     },
     methods: {
-        addEnroll() {
-          axios.post(this.URL + '/create_enroll', this.newEnroll, this.config_request)
+        addGroup() {
+          var data = {
+            gru_name:this.newGroup.gru_name,
+            tea_id:this.newGroup.tea_id.id,
+            cur_id:this.newGroup.cur_id.id,
+          }
+          axios.post(this.URL + '/create_group', data, this.config_request)
           .then((res) => {
-            this.enrolls.push(res.data);
+            this.groups.push(res.data);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
-          this.newEnroll = {};
+          this.newGroup = {};
         },
-        deleteEnroll(item) {
-          axios.delete(this.URL + '/delete_enroll/' + item.enr_id, this.config_request)
+        deleteGroup(item) {
+          axios.delete(this.URL + '/delete_group/' + item.gru_id, this.config_request)
           .then((res) => {
-            this.enrolls.splice(this.enrolls.indexOf(item), 1);
+            this.groups.splice(this.groups.indexOf(item), 1);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        resetForm(){
+          this.newGroup = {};
         }
     },
     created() {
-        axios.get(this.URL + '/enrolls')
-        .then((res) => { this.enrolls = res.data; })
+        axios.get(this.URL + '/groups')
+        .then((res) => { this.groups = res.data; })
+        .catch((err) => { console.log(err); })
+
+        axios.get(this.URL + '/users')
+        .then((res) => { this.users = res.data; })
+        .catch((err) => { console.log(err); })
+
+        axios.get(this.URL + '/get_teacher_combobox')
+        .then((res) => { this.teachers = res.data; })
+        .catch((err) => { console.log(err); })
+
+        axios.get(this.URL + '/get_course_combobox')
+        .then((res) => { this.courses = res.data; })
         .catch((err) => { console.log(err); })
     },
+
     
   }
 </script>

@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="text-center" >
             <v-col>
-                <h1>Tabla Schedule</h1>
+                <h1>Tabla Teacher</h1>
             </v-col>
         </v-row>
 
@@ -16,38 +16,24 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="sch_begin"
-                v-model="newSchedule.sch_begin"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Begin"
+                ref="tea_type"
+                v-model="newTeacher.tea_type"
+                label="Tipo"
                 required
               ></v-text-field>
               <v-text-field
-                ref="sch_end"
-                v-model="newSchedule.sch_end"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="End"
+                ref="tea_cat"
+                v-model="newTeacher.tea_cat"
+                label="Categoria"
                 required
               ></v-text-field>
-              <v-text-field
-                ref="sch_day"
-                v-model="newSchedule.sch_day"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Day"
+              <v-autocomplete
+                ref="usr_id"
+                :items="headers_user"
+                v-model="newTeacher.usr_id"
+                label="User"
                 required
-              ></v-text-field>
-              <v-text-field
-                ref="gru_id"
-                v-model="newSchedule.gru_id"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Grupo"
-                required
-              ></v-text-field>
-
+              ></v-autocomplete>
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -56,7 +42,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -76,7 +61,7 @@
               <v-btn
                 color="primary"
                 text
-                @click="addSchedule"
+                @click="addTeacher"
               >
                 Submit
               
@@ -91,7 +76,7 @@
             <v-col>
                 <v-card>
                     <v-card-title>
-                    Tabla Schedule
+                    Tabla Cursos
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -103,7 +88,7 @@
                     </v-card-title>
                     <v-data-table
                     :headers="headers"
-                    :items="schedules"
+                    :items="teachers"
                     :search="search"
                     >
                     <template v-slot:item.action="{item}">
@@ -113,7 +98,7 @@
                       dark
                       x-small
                       color="error"
-                      @click="deleteSchedule(item)"
+                      @click="deleteCourse(item)"
                       >
                       <v-icon>mdi-delete</v-icon>
                       </v-btn>
@@ -140,20 +125,19 @@ import axios from 'axios';
             text: 'Rol',
             align: 'start',
             sortable: false,
-            value: 'sch_begin',
+            value: 'tea_type',
           },
-          { text: 'Description', sortable: false, value: 'sch_end' },
-          { text: 'Description', sortable: false, value: 'sch_day' },
-          { text: 'User', sortable: false, value: 'gru_id' },
+          { text: 'Description', sortable: false, value: 'tea_cat' },
+          { text: 'User', sortable: false, value: 'usr_id' },
           {
             text: 'Created at',
             sortable: false,
-            value: 'enr_created',
+            value: 'tea_created',
           },
           {
             text: 'Updated at',
             sortable: false,
-            value: 'enr_updated',
+            value: 'tea_updated',
           },
           {
             text: 'Actions',
@@ -161,8 +145,8 @@ import axios from 'axios';
             value: 'action',
           }
         ],
-        schedules: [],
-        newSchedule: {},
+        teachers: [],
+        newTeacher: {},
         user:[],
         headers_user: [{value:"usr_id"}],
         URL: 'http://localhost:5000',
@@ -173,27 +157,30 @@ import axios from 'axios';
       }
     },
     methods: {
-        addSchedule() {
-          axios.post(this.URL + '/create_schedule', this.newSchedule, this.config_request)
+        addTeacher() {
+          axios.post(this.URL + '/create_teacher', this.newTeacher, this.config_request)
           .then((res) => {
-            this.schedules.push(res.data);
+            this.teachers.push(res.data);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
-          this.newSchedule = {};
+          this.newTeacher = {};
         },
-        deleteSchedule(item) {
-          axios.delete(this.URL + '/delete_schedule/' + item.sch_id, this.config_request)
+        deleteTeacher(item) {
+          axios.delete(this.URL + '/delete_teacher/' + item.cur_id, this.config_request)
           .then((res) => {
-            this.schedules.splice(this.schedules.indexOf(item), 1);
+            this.teachers.splice(this.teachers.indexOf(item), 1);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        resetForm(){
+          this.newTeacher = {};
         }
     },
     created() {
-        axios.get(this.URL + '/schedules')
-        .then((res) => { this.schedules = res.data; })
+        axios.get(this.URL + '/teachers')
+        .then((res) => { this.teachers = res.data; })
         .catch((err) => { console.log(err); })
     },
     

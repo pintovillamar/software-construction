@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="text-center" >
             <v-col>
-                <h1>Tabla Group</h1>
+                <h1>Tabla Schedule</h1>
             </v-col>
         </v-row>
 
@@ -16,31 +16,30 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="gru_name"
-                v-model="newGroup.gru_name"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
-                label="Name"
+                ref="sch_begin"
+                v-model="newSchedule.sch_begin"
+                label="Begin"
                 required
               ></v-text-field>
-              <v-combobox
-                v-model="newGroup.tea_id"
-                :items="teachers"
-                item-text="title"
-                item-value="id"
-                label="Teacher"          
-                outlined
-                dense
-              ></v-combobox>
-              <v-combobox
-                v-model="newGroup.cur_id"
-                :items="courses"
-                item-text="title"
-                item-value="id"
-                label="Courses"          
-                outlined
-                dense
-              ></v-combobox>
+              <v-text-field
+                ref="sch_end"
+                v-model="newSchedule.sch_end"
+                label="End"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="sch_day"
+                v-model="newSchedule.sch_day"
+                label="Day"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="gru_id"
+                v-model="newSchedule.gru_id"
+                label="Grupo"
+                required
+              ></v-text-field>
+
             </v-card-text>
             <v-card-actions>
               <v-btn text>
@@ -49,7 +48,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -69,10 +67,12 @@
               <v-btn
                 color="primary"
                 text
-                @click="addGroup"
+                @click="addSchedule"
               >
                 Submit
+              
               </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-col>
@@ -82,7 +82,7 @@
             <v-col>
                 <v-card>
                     <v-card-title>
-                    Roles
+                    Tabla Schedule
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -94,7 +94,7 @@
                     </v-card-title>
                     <v-data-table
                     :headers="headers"
-                    :items="groups"
+                    :items="schedules"
                     :search="search"
                     >
                     <template v-slot:item.action="{item}">
@@ -104,7 +104,7 @@
                       dark
                       x-small
                       color="error"
-                      @click="deleteGroup(item)"
+                      @click="deleteSchedule(item)"
                       >
                       <v-icon>mdi-delete</v-icon>
                       </v-btn>
@@ -128,23 +128,23 @@ import axios from 'axios';
         search: '',
         headers: [
           {
-            text: 'Name',
+            text: 'Rol',
             align: 'start',
             sortable: false,
-            value: 'gru_name',
+            value: 'sch_begin',
           },
-          
-          { text: 'Teacher', sortable: false, value: 'tea_id'},
-          { text: 'Course', sortable: false, value: 'cur_id' },
+          { text: 'Description', sortable: false, value: 'sch_end' },
+          { text: 'Description', sortable: false, value: 'sch_day' },
+          { text: 'User', sortable: false, value: 'gru_id' },
           {
             text: 'Created at',
             sortable: false,
-            value: 'gru_created',
+            value: 'enr_created',
           },
           {
             text: 'Updated at',
             sortable: false,
-            value: 'gru_updated',
+            value: 'enr_updated',
           },
           {
             text: 'Actions',
@@ -152,13 +152,10 @@ import axios from 'axios';
             value: 'action',
           }
         ],
-        groups: [],
-        teachers: [],
-        courses:[],
-        users:[],
-        // headers_courses: [{value:"cur_id"}],
-        // headers_teachers: [{value:"tea_id"}],
-        newGroup: {},
+        schedules: [],
+        newSchedule: {},
+        user:[],
+        headers_user: [{value:"usr_id"}],
         URL: 'http://localhost:5000',
         config_request: {
             'Content-Type': 'application/json',
@@ -167,47 +164,32 @@ import axios from 'axios';
       }
     },
     methods: {
-        addGroup() {
-          var data = {
-            gru_name:this.newGroup.gru_name,
-            tea_id:this.newGroup.tea_id.id,
-            cur_id:this.newGroup.cur_id.id,
-          }
-          axios.post(this.URL + '/create_group', data, this.config_request)
+        addSchedule() {
+          axios.post(this.URL + '/create_schedule', this.newSchedule, this.config_request)
           .then((res) => {
-            this.groups.push(res.data);
+            this.schedules.push(res.data);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
-          this.newGroup = {};
+          this.newSchedule = {};
         },
-        deleteGroup(item) {
-          axios.delete(this.URL + '/delete_group/' + item.gru_id, this.config_request)
+        deleteSchedule(item) {
+          axios.delete(this.URL + '/delete_schedule/' + item.sch_id, this.config_request)
           .then((res) => {
-            this.groups.splice(this.groups.indexOf(item), 1);
+            this.schedules.splice(this.schedules.indexOf(item), 1);
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        resetForm() {
+          this.newSchedule = {};
         }
     },
     created() {
-        axios.get(this.URL + '/groups')
-        .then((res) => { this.groups = res.data; })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/users')
-        .then((res) => { this.users = res.data; })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/get_teacher_combobox')
-        .then((res) => { this.teachers = res.data; console.log(this.teachers) })
-        .catch((err) => { console.log(err); })
-
-        axios.get(this.URL + '/get_course_combobox')
-        .then((res) => { this.courses = res.data; })
+        axios.get(this.URL + '/schedules')
+        .then((res) => { this.schedules = res.data; })
         .catch((err) => { console.log(err); })
     },
-
     
   }
 </script>

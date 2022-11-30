@@ -18,24 +18,18 @@
               <v-text-field
                 ref="usr_name"
                 v-model="newUser.usr_name"
-                :rules="[() => !!name || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Nombres"
                 required
               ></v-text-field>
               <v-text-field
                 ref="usr_last_name"
                 v-model="newUser.usr_last_name"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Apellidos"
                 required
               ></v-text-field>
             <v-text-field
                 ref="usr_dni"
                 v-model="newUser.usr_dni"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="DNI"
                 required
             ></v-text-field>
@@ -87,8 +81,6 @@
             <v-text-field
                 ref="usr_email"
                 v-model="newUser.usr_email"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Correo electrónico"
                 required
             ></v-text-field>
@@ -97,8 +89,6 @@
                 ref="usr_password"
                 :type="show1 ? 'text' : 'password'"
                 v-model="newUser.usr_password"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Contraseña"
                 @click:append="show1 = !show1"
                 
@@ -113,27 +103,18 @@
                 required
             ></v-text-field> -->
 
-            <v-btn
-              :loading="loading3"
-              :disabled="loading3"
-              color="blue-grey"
-              class="ma-2 white--text"
-              @click="loader = 'loading3'"
-            >
-              Upload
-              <v-icon
-                right
-                dark
-              >
-                mdi-cloud-upload
-              </v-icon>
-            </v-btn>
+            <template>
+              <v-file-input
+                show-size
+                counter
+                multiple
+                label="Foto"
+              ></v-file-input>
+            </template>
 
             <v-text-field
                 ref="ust_id"
                 v-model="newUser.ust_id"
-                :rules="[() => !!description || 'This field is required']"
-                :error-messages="errorMessages"
                 label="Rol"
                 required
             ></v-text-field>
@@ -145,7 +126,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -226,6 +206,7 @@ import axios from 'axios';
         menu: false,
         modal: false,
         menu2: false,
+        show1: false,
 
 
         search: '',
@@ -287,6 +268,9 @@ import axios from 'axios';
         },
         save (date) {
             this.$refs.menu.save(date)
+        },
+        resetForm() {
+          this.newUser = {};
         },
     },
     created() {

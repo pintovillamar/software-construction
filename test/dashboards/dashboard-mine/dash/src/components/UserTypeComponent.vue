@@ -37,7 +37,6 @@
               <v-spacer></v-spacer>
               <v-slide-x-reverse-transition>
                 <v-tooltip
-                  v-if="formHasErrors"
                   left
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -87,19 +86,79 @@
                     :items="user_types"
                     :search="search"
                     >
-                    <template v-slot:item.action="{item}">
-                      <v-btn
-                      class="mx-0"
-                      fab
-                      dark
-                      x-small
-                      color="error"
-                      @click="deleteUserType(item)"
-                      >
-                      <v-icon>mdi-delete</v-icon>
-                      </v-btn>
+
+                    <template v-slot:item.actions="{ item }">
+                      <div class="text-truncate">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="showEditDialog(item)"
+                            color="blue" 
+                          >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            small
+                            @click="showDeleteDialog(item)"
+                            color="pink" 
+                          >
+                            mdi-delete
+                        </v-icon>
+                      </div>
                     </template>
                   </v-data-table>
+
+                  <!-- Aquí empiezan los dialogs de UPDATE y DELETE -->
+
+
+                <!-- Dialog para DELETE -->
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-card>
+                      <v-card-title>Delete</v-card-title>
+                      <v-card-text>
+                        Are you sure you want to delete {{itemToDelete.ust_name}}?
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="dialogDelete = false">Cancel</v-btn>
+                        <v-btn color="blue darken-1" text @click="deleteUserType(itemToDelete); dialogDelete = false">OK</v-btn>
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <!-- Dialog para UPDATE -->
+                <v-dialog v-model="dialog" max-width="500px">
+                  <v-card>
+                    <v-card-title>
+                        <span editedItem.ust_name >Edit {{editedItem.ust_name}}</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.ust_name"
+                            label="Rol"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.ust_desc"
+                            label="Descripción"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="showEditDialog()">Cancel</v-btn>
+                      <v-btn color="green " text @click="updateUserType(editedItem); showEditDialog()">Save</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
                 </v-card>
             </v-col>
         </v-row>
@@ -115,6 +174,8 @@ import axios from 'axios';
 
     data () {
       return {
+        dialog: false,
+        dialogDelete: false,
         search: '',
         headers: [
           {
@@ -136,10 +197,22 @@ import axios from 'axios';
           },
           {
             text: 'Actions',
-            sortable: false,
-            value: 'action',
+            value: 'actions',
+            sortable: false
           }
         ],
+        editedItem: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
+        itemToDelete: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
         user_types: [],
         newUserType: {},
         URL: 'http://localhost:5000',
@@ -166,6 +239,25 @@ import axios from 'axios';
             console.log(res.data)
           })
           .catch((err) => { console.log(err); })
+        },
+        updateUserType(item) {
+          axios.put(this.URL + '/update_user_type/' + item.ust_id, item, this.config_request)
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => { console.log(err); })
+        },
+
+        showEditDialog(item) {
+        this.editedItem = item||{}
+        this.dialog = !this.dialog
+        },
+        showDeleteDialog(item) {
+        this.itemToDelete = item
+        this.dialogDelete = !this.dialogDelete
+        },  
+        resetForm() {
+          this.newUserType = {};
         }
     },
     clear () {
