@@ -1,41 +1,41 @@
 <template>
 	<div>
-		<testing-componente/>
+		<user-type-component/>
 
-		<testing-componente2/>
+		<user-component/>
 
-		<testing-component3/>
+		<group-component/>
 
-		<testing-component4/>
+		<course-component/>
 
-		<TestingComponent5/>
+		<teacher-component/>
 
-		<TestingComponent6/>
+		<enroll-component/>
 
-		<TestingComponent7/>
+		<schedule-component/>
 	</div>
 </template>
 
 <script>
-	import TestingComponente from '@/components/TestingComponente.vue';
-	import TestingComponente2 from '@/components/TestingComponente2.vue';
-	import TestingComponent3 from '@/components/TestingComponent3.vue';
-	import TestingComponent4 from '@/components/TestingComponent4.vue';
-	import TestingComponent5 from '@/components/TestingComponent5.vue';
-	import TestingComponent6 from '@/components/TestingComponent6.vue';
-	import TestingComponent7 from '@/components/TestingComponent7.vue';
+	import UserTypeComponent from '@/components/UserTypeComponent.vue';
+	import UserComponent from '@/components/UserComponent.vue';
+	import GroupComponent from '@/components/GroupComponent.vue';
+	import CourseComponent from '@/components/CourseComponent.vue';
+	import TeacherComponent from '@/components/TeacherComponent.vue';
+	import EnrollComponent from '@/components/EnrollComponent.vue';
+	import ScheduleComponent from '@/components/ScheduleComponent.vue';
 	
 	export default {
 		name: 'Testing',
 
 		components: {
-    TestingComponente,
-    TestingComponente2,
-    TestingComponent3,
-    TestingComponent4,
-    TestingComponent5,
-    TestingComponent6,
-	TestingComponent7
-}
+			UserTypeComponent,
+			UserComponent,
+			GroupComponent,
+			CourseComponent,
+			TeacherComponent,
+			EnrollComponent,
+			ScheduleComponent
+		}
 	}
 </script>
