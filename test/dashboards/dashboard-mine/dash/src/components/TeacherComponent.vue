@@ -28,9 +28,9 @@
                 required
               ></v-text-field>
               <v-autocomplete
-                ref="usr_id"
+                ref="usr_name"
                 :items="headers_user"
-                v-model="newTeacher.usr_id"
+                v-model="newTeacher.usr_name"
                 label="User"
                 required
               ></v-autocomplete>
@@ -148,7 +148,7 @@ import axios from 'axios';
         teachers: [],
         newTeacher: {},
         user:[],
-        headers_user: [{value:"usr_id"}],
+        headers_user: [{value:"usr_name"}],
         URL: 'http://localhost:5000',
         config_request: {
             'Content-Type': 'application/json',

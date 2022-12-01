@@ -78,9 +78,17 @@
       items: [
           { title: 'Inicio', icon: 'mdi-home-account',to: '/', color: 'blue'},
           { title: 'Asistencia', icon: 'mdi-checkbox-marked-circle',to: '/asistencia', color:'green'},
-          { title: 'Acerca', icon: 'mdi-help',to: "/about", color:'purple'},
-          { title: 'Testing Enviroment', icon: 'mdi-test-tube',to: "/test", color:'orange'},
-          { title: 'Face Detection', icon: 'mdi-face-recognition',to: "/face", color:'red'}
+          
+          // { title: 'Testing Enviroment', icon: 'mdi-test-tube',to: "/test", color:'orange'},
+          { title: 'Face Detection', icon: 'mdi-face-recognition',to: "/face", color:'red'},
+          { title: 'Roles', icon: 'mdi-shield-crown-outline',to: "/roles", color:'blue'},
+          { title: 'User', icon: 'mdi-account',to: "/user", color:'blue'},
+          { title: 'Group', icon: 'mdi-account-group',to: "/group", color:'blue'},
+          { title: 'Course', icon: 'mdi-book',to: "/course", color:'blue'},
+          { title: 'Teacher', icon: 'mdi-human-male-board',to: "/teacher", color:'blue'},
+          { title: 'Enroll', icon: 'mdi-book-arrow-up-outline',to: "/enroll", color:'blue'},
+          { title: 'Schedule', icon: 'mdi-calendar-month',to: "/schedule", color:'blue'},
+          { title: 'Acerca de', icon: 'mdi-help',to: "/about", color:'purple'}
         ]
     }),
   }

@@ -27,7 +27,43 @@ const routes = [
     path: '/face',
     name: 'face',
     component: () => import('../views/FaceView.vue')
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import('../views/UserView.vue')
+  },
+  {
+    path: '/group',
+    name: 'group',
+    component: () => import('../views/GroupView.vue')
+  },
+  {
+    path: '/course',
+    name: 'course',
+    component: () => import('../views/CourseView.vue')
+  },
+  {
+    path: '/teacher',
+    name: 'teacher',
+    component: () => import('../views/TeacherView.vue')
+  },
+  {
+    path: '/enroll',
+    name: 'enroll',
+    component: () => import('../views/EnrollView.vue')
+  },
+  {
+    path: '/schedule',
+    name: 'schedule',
+    component: () => import('../views/ScheduleView.vue')
+  },
+  {
+    path: '/roles',
+    name: 'roles',
+    component: () => import('../views/RolesView.vue')
   }
+  
 ]
 
 const router = new VueRouter({

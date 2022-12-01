@@ -84,19 +84,79 @@
                     :items="courses"
                     :search="search"
                     >
-                    <template v-slot:item.action="{item}">
-                      <v-btn
-                      class="mx-0"
-                      fab
-                      dark
-                      x-small
-                      color="error"
-                      @click="deleteCourse(item)"
-                      >
-                      <v-icon>mdi-delete</v-icon>
-                      </v-btn>
+                    <!-- new -->
+                    <template v-slot:item.actions="{item}">
+                      <div class="text-truncate">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="showEditDialog(item)"
+                            color="blue" 
+                          >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            small
+                            @click="showDeleteDialog(item)"
+                            color="pink" 
+                          >
+                            mdi-delete
+                        </v-icon>
+                      </div>
                     </template>
                   </v-data-table>
+                  <!--new-->
+                  <!-- Aquí empiezan los dialogs de UPDATE y DELETE -->
+                  <!-- Dialog para DELETE -->
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-card>
+                      <v-card-title>Delete</v-card-title>
+                      <v-card-text>
+                        Are you sure you want to delete {{itemToDelete.cur_name}}?
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="dialogDelete = false">Cancel</v-btn>
+                        <v-btn color="blue darken-1" text @click="deleteCourse(itemToDelete); dialogDelete = false">OK</v-btn>
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <!-- Dialog para UPDATE -->
+                <v-dialog v-model="dialog" max-width="500px">
+                  <v-card>
+                    <v-card-title>
+                        <span editedItem.cur_name >Edit {{editedItem.cur_name}}</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.cur_name"
+                            label="Name"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.cur_desc"
+                            label="Descripción"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="showEditDialog()">Cancel</v-btn>
+                      <v-btn color="green " text @click="updateCourse(editedItem); showEditDialog()">Save</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
+                <!--new---->
+
                 </v-card>
             </v-col>
         </v-row>
@@ -112,6 +172,20 @@ import axios from 'axios';
 
     data () {
       return {
+        dialog: false,
+        dialogDelete: false,
+        editedItem: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
+        itemToDelete: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
         search: '',
         headers: [
           {
@@ -133,8 +207,8 @@ import axios from 'axios';
           },
           {
             text: 'Actions',
-            sortable: false,
-            value: 'action',
+            value: 'actions',
+            sortable: false
           }
         ],
         courses: [],
@@ -156,7 +230,7 @@ import axios from 'axios';
           .catch((err) => { console.log(err); })
           this.newCourse = {};
         },
-        deleteUserType(item) {
+        deleteCourse(item) {
           axios.delete(this.URL + '/delete_course/' + item.cur_id, this.config_request)
           .then((res) => {
             this.courses.splice(this.courses.indexOf(item), 1);
@@ -164,10 +238,28 @@ import axios from 'axios';
           })
           .catch((err) => { console.log(err); })
         },
+        updateCourse(item) {
+          axios.put(this.URL + '/update_course/' + item.cur_id, item, this.config_request)
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => { console.log(err); })
+        },
+        showEditDialog(item) {
+        this.editedItem = item||{}
+        this.dialog = !this.dialog
+        },
+        showDeleteDialog(item) {
+        this.itemToDelete = item
+        this.dialogDelete = !this.dialogDelete
+        },
         resetForm(){
           this.newCourse = {};
         }
     },
+    clear () {
+      this.newCourse.cur_name = '';
+      },
     created() {
         axios.get(this.URL + '/courses')
         .then((res) => { this.courses = res.data; })

@@ -86,6 +86,7 @@
                     :items="user_types"
                     :search="search"
                     >
+                    <!--new---->
 
                     <template v-slot:item.actions="{ item }">
                       <div class="text-truncate">
@@ -107,6 +108,8 @@
                       </div>
                     </template>
                   </v-data-table>
+                  <!--new---->
+
 
                   <!-- Aquí empiezan los dialogs de UPDATE y DELETE -->
 
@@ -158,6 +161,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+                <!--new---->
 
                 </v-card>
             </v-col>
@@ -174,8 +178,22 @@ import axios from 'axios';
 
     data () {
       return {
+        //new
         dialog: false,
         dialogDelete: false,
+        editedItem: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
+        itemToDelete: {
+          ust_id: '',
+          ust_name: '',
+          ust_desc: '',
+          ust_updated: '',
+        },
+        //new
         search: '',
         headers: [
           {
@@ -195,24 +213,15 @@ import axios from 'axios';
             sortable: false,
             value: 'ust_updated',
           },
+          //new
           {
             text: 'Actions',
             value: 'actions',
             sortable: false
           }
+          //new
         ],
-        editedItem: {
-          ust_id: '',
-          ust_name: '',
-          ust_desc: '',
-          ust_updated: '',
-        },
-        itemToDelete: {
-          ust_id: '',
-          ust_name: '',
-          ust_desc: '',
-          ust_updated: '',
-        },
+        
         user_types: [],
         newUserType: {},
         URL: 'http://localhost:5000',
@@ -240,6 +249,7 @@ import axios from 'axios';
           })
           .catch((err) => { console.log(err); })
         },
+        //new
         updateUserType(item) {
           axios.put(this.URL + '/update_user_type/' + item.ust_id, item, this.config_request)
           .then((res) => {
@@ -247,7 +257,6 @@ import axios from 'axios';
           })
           .catch((err) => { console.log(err); })
         },
-
         showEditDialog(item) {
         this.editedItem = item||{}
         this.dialog = !this.dialog
@@ -255,14 +264,18 @@ import axios from 'axios';
         showDeleteDialog(item) {
         this.itemToDelete = item
         this.dialogDelete = !this.dialogDelete
-        },  
+        },
+        //new  
         resetForm() {
           this.newUserType = {};
         }
+        
     },
+    //new
     clear () {
       this.newUserType.ust_name = '';
       },
+    //new
     created() {
         axios.get(this.URL + '/user_types')
         .then((res) => { this.user_types = res.data; })
