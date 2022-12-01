@@ -264,7 +264,7 @@ import axios from 'axios';
           this.newTeacher = {};
         },
         deleteTeacher(item) {
-          axios.delete(this.URL + '/delete_teacher/' + item.cur_id, this.config_request)
+          axios.delete(this.URL + '/delete_teacher/' + item.tea_id, this.config_request)
           .then((res) => {
             this.teachers.splice(this.teachers.indexOf(item), 1);
             console.log(res.data)
