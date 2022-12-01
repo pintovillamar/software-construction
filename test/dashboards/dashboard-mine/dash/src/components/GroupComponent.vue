@@ -35,7 +35,7 @@
                 :items="courses"
                 item-text="title"
                 item-value="id"
-                label="Courses"          
+                label="Course"          
                 outlined
                 dense
               ></v-combobox>

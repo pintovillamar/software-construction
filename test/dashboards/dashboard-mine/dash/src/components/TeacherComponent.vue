@@ -27,13 +27,25 @@
                 label="Categoria"
                 required
               ></v-text-field>
-              <v-autocomplete
+
+              <!-- <v-autocomplete
                 ref="usr_name"
                 :items="headers_user"
                 v-model="newTeacher.usr_name"
                 label="User"
                 required
-              ></v-autocomplete>
+              ></v-autocomplete> -->
+
+              <v-combobox
+                v-model="newTeacher.usr_name"
+                :items="users"
+                item-text="title"
+                item-value="id"
+                label="User"          
+                outlined
+                dense
+              ></v-combobox>
+
             </v-card-text>
             <v-card-actions>
               <v-btn text>
