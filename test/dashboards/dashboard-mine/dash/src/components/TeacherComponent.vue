@@ -91,19 +91,96 @@
                     :items="teachers"
                     :search="search"
                     >
-                    <template v-slot:item.action="{item}">
-                      <v-btn
-                      class="mx-0"
-                      fab
-                      dark
-                      x-small
-                      color="error"
-                      @click="deleteCourse(item)"
-                      >
-                      <v-icon>mdi-delete</v-icon>
-                      </v-btn>
+                    <!--new---->
+
+                    <template v-slot:item.actions="{ item }">
+                      <div class="text-truncate">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="showEditDialog(item)"
+                            color="blue" 
+                          >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            small
+                            @click="showDeleteDialog(item)"
+                            color="pink" 
+                          >
+                            mdi-delete
+                        </v-icon>
+                      </div>
                     </template>
+
+                    <!--new---->
                   </v-data-table>
+
+                  <!-- Aquí empiezan los dialogs de UPDATE y DELETE -->
+
+                <!-- Dialog para DELETE -->
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-card>
+                      <v-card-title>Delete</v-card-title>
+                      <v-card-text>
+                        Are you sure you want to delete {{itemToDelete.tea_id}}?
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="dialogDelete = false">Cancel</v-btn>
+                        <v-btn color="blue darken-1" text @click="deleteTeacher(itemToDelete); dialogDelete = false">OK</v-btn>
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <!-- Dialog para UPDATE -->
+                <v-dialog v-model="dialog" max-width="500px">
+                  <v-card>
+                    <v-card-title>
+                        <span editedItem.tea_id >Edit {{editedItem.tea_id}}</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.tea_id"
+                            label="Profesor"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <!-- <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.usr_id"
+                            label="Usuario"
+                            required
+                          ></v-text-field>
+                        </v-col> -->
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.tea_type"
+                            label="Tipo"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.tea_cat"
+                            label="Categoria"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="showEditDialog()">Cancel</v-btn>
+                      <v-btn color="green " text @click="updateGroup(editedItem); showEditDialog()">Save</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <!--new---->
+
                 </v-card>
             </v-col>
         </v-row>
@@ -119,6 +196,24 @@ import axios from 'axios';
 
     data () {
       return {
+        //new
+        dialog: false,
+        dialogDelete: false,
+        editedItem: {
+          tea_id: '',
+          usr_id: '',
+          tea_type: '',
+          tea_cat: '',
+          tea_updated: '',
+        },
+        itemToDelete: {
+          tea_id: '',
+          usr_id: '',
+          tea_type: '',
+          tea_cat: '',
+          tea_updated: '',
+        },
+        //new
         search: '',
         headers: [
           {
@@ -139,11 +234,13 @@ import axios from 'axios';
             sortable: false,
             value: 'tea_updated',
           },
+          //new
           {
             text: 'Actions',
-            sortable: false,
-            value: 'action',
+            value: 'actions',
+            sortable: false
           }
+          //new
         ],
         teachers: [],
         newTeacher: {},
@@ -174,10 +271,32 @@ import axios from 'axios';
           })
           .catch((err) => { console.log(err); })
         },
+        //new
+        updateTeacher(item) {
+          axios.put(this.URL + '/update_teacher/' + item.tea_id, item, this.config_request)
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => { console.log(err); })
+        },
+        showEditDialog(item) {
+        this.editedItem = item||{}
+        this.dialog = !this.dialog
+        },
+        showDeleteDialog(item) {
+        this.itemToDelete = item
+        this.dialogDelete = !this.dialogDelete
+        },
+        //new  
         resetForm(){
           this.newTeacher = {};
         }
     },
+    //new
+    clear () {
+      this.newTeacher.tea_id = '';
+      },
+    //new
     created() {
         axios.get(this.URL + '/teachers')
         .then((res) => { this.teachers = res.data; })
